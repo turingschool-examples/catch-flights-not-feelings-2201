@@ -89,7 +89,7 @@ RSpec.describe 'Flights index page' do
   expect(page).to have_content(@passenger_5.name)
   end
 
-  it 'can remove passengers from a flight' do
+  it 'has links to remove passengers from a flight' do
     visit '/flights'
     within 'flight_001'
     expect(page).to have_link("Remove: #{@passenger_1.name}")
@@ -103,5 +103,16 @@ RSpec.describe 'Flights index page' do
     expect(page).to have_link("Remove: #{@passenger_4.name}")
     within 'flight_005'
     expect(page).to have_link("Remove: #{@passenger_5.name}")
+  end
+
+  it 'has links to remove passengers from a flight' do
+    visit '/flights'
+    within 'flight_001'
+    click_on("Remove: #{@passenger_1.name}")
+    expect(page).to_not have_content(@passenger_1.name)
+    expect(page).to have_link("Remove: #{@passenger_6.name}")
+    expect(page).to have_link("Remove: #{@passenger_5.name}")
+    @passenger_1.reload
+    expect(@passenger_1.name).to eq("dude")
   end
 end
