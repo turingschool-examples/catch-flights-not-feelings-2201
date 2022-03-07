@@ -6,8 +6,8 @@
       <p><%= passenger.find_name %></p>
       <%= form_with url: '/flights', method: :delete, local: true do |f| %>
       <%= f.text_field :id, value: @passenger.id, hidden: true %>
-      <%= f.submit, "Remove {#{passenger.find_name} from this flight" %>
-      <% end  %>
-    <% end %>
-  </div>
+      <%= f.submit "Remove {#{passenger.find_name} from this flight" %>
+      <% end %>
+      <% end %>
+    </div>
   <% end %>
