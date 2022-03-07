@@ -74,6 +74,7 @@ RSpec.describe 'Flights Index Page' do
       expect(page).to have_button("Remove #{passenger1.name}")
       click_button("Remove #{passenger1.name}")
       expect(page).to have_no_content(passenger1.name)
+      # Attempt to demonstrate that Passenger1 is not deleted entirely, only joins row was deleted. 
       expect(passenger1).to be_a(Passenger)
     end 
   end 

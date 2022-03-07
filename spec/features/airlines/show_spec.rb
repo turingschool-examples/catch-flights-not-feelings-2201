@@ -53,6 +53,5 @@ RSpec.describe 'The Airlines Show Page' do
       expect(page).to have_content(passenger2.name, count: 1)
     end 
     expect(page).to have_no_content(passenger1.name)
-    expect(page).to have_no_content(passenger3.name)
   end 
 end 
