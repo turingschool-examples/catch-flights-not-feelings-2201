@@ -8,11 +8,11 @@ RSpec.describe 'Flights Index' do
         @flight_1 = Flight.create!(number: 1, date: '01-02-2000', departure_city: 'Houston', arrival_city: 'Los Angeles', airline: @united)
         @flight_2 = Flight.create!(number: 2, date: '04-02-2000', departure_city: 'San Antonio', arrival_city: 'New York', airline: @united)
         @flight_3 = Flight.create!(number: 3, date: '07-02-2000', departure_city: 'San Francisco', arrival_city: 'Chicago', airline: @southwest)
-        @passenger_1 = Passenger.create!(name: 'bob', age: 7)
+        @passenger_1 = Passenger.create!(name: 'Bob', age: 7)
         @flight_1.add_passenger(@passenger_1)
-        @passenger_2 = Passenger.create!(name: 'sam', age: 10)
+        @passenger_2 = Passenger.create!(name: 'Sam', age: 10)
         @flight_2.add_passenger(@passenger_2)
-        @passenger_3 = Passenger.create!(name: 'john', age: 12)
+        @passenger_3 = Passenger.create!(name: 'John', age: 12)
         @flight_3.add_passenger(@passenger_3)
     end
     it 'show the flight number for every flight' do 

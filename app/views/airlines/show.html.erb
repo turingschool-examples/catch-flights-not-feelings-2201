@@ -3,8 +3,8 @@
 <h3>Adult Passengers</h3>
 <div id = "passengers">
 <ol>
-<% Airline.get_uniq_passengers(@airline).each do |passenger| %>
-    <li><%= passenger.name %> </li>
+<% Airline.get_uniq_passengers(@airline).pluck(:name).uniq.each do |passenger| %>
+    <li><%= passenger %> </li>
     <% end %>
     </ol>
 

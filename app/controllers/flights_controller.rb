@@ -1,6 +1,6 @@
 class FlightsController < ApplicationController
     def index 
-        @flights = Flight.all
+        @flights = Flight.all.limit(3)
     end
     def destroy 
         flight = Flight.find(params[:flight_id])
