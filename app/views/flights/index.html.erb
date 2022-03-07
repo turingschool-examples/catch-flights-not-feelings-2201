@@ -1,0 +1,10 @@
+<% @flights.each_with_index do |flight, index| %> 
+  <section id= "flights-<%= flight.id %>">
+    <p><%= flight.id %></p>
+    <%= flight.airline.name %>
+    <% flight.passengers.each do |passenger| %>
+      <%= passenger.name %>
+      <%= button_to "Remove #{passenger.name}", "flight_passengers/#{passenger.id}?flight_id=#{flight.id}",  method: :delete%>
+    <% end %>
+  </section>
+<% end %>

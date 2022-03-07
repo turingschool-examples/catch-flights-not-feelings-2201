@@ -1,0 +1,7 @@
+<%= "The Show Page for #{@airline.name}" %>
+
+<% @airline.adult_passengers.uniq.each do |passenger| %>
+  <section id= "<%= passenger.name.parameterize %>">
+    <p><%= passenger.name %><p>
+  </section>
+<% end %>
