@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  resources :flights, only:[:index]
+
+  resources :flights, only:[:index] do
+    resources :passengers, only:[:destroy], controller: "passenger_flights"
+  end
+
 end

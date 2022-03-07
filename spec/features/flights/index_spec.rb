@@ -26,7 +26,6 @@ RSpec.describe 'Flights Index Page' do
 
   it "shows flights attributes" do
     visit "/flights"
-save_and_open_page
 
     within ".flight_attributes" do
       expect(page).to have_content("#{@flight_1.number}")
@@ -49,5 +48,17 @@ save_and_open_page
       expect(page).to have_content("#{@passenger_7.name}")
       expect(page).to have_content("#{@passenger_8.name}")
     end
+  end
+
+  it "can remove a passenger" do
+    visit "/flights"
+
+    within ".flight_attributes" do
+      click_link("Remove #{@passenger_1.name}")
+    end
+save_and_open_page
+    expect(current_path).to eq("/flights")
+
+    expect(page).to_not have_content("#{@passenger_1.name}")
   end
 end
