@@ -5,6 +5,7 @@ class FlightsController < ApplicationController
 
   end
 
+  private
 
   def set_flights
     @flights = Flight.all
