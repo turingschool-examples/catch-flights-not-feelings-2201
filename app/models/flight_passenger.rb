@@ -3,7 +3,6 @@ class FlightPassenger < ApplicationRecord
   belongs_to :passenger
 
   def self.find_and_delete(flight_id, passenger_id)
-    record = where(flight_id: flight_id, passenger_id: passenger_id)
-    FlightPassenger.destroy(record[0].id)
+    FlightPassenger.destroy(where(flight_id: flight_id, passenger_id: passenger_id)[0].id)
   end
 end
