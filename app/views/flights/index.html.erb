@@ -1,0 +1,6 @@
+<h1>Flights Index page</h1>
+<% @flights.each do |flight| %>
+<div class="flight_<%=flight.number%>">
+  <p>Flight number: <%= flight.number %> Airline: <%= flight.airline.name %></p>
+</div>
+<% end %>

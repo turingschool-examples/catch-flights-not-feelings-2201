@@ -6,23 +6,23 @@ RSpec.describe 'Flights index page' do
     @air_2 = Airline.create!(name: 'Delta')
     @air_3 = Airline.create!(name: 'Jetblue')
 
-    @flight_1 = air_1.flights.create!(number: "001",
+    @flight_1 = @air_1.flights.create!(number: "001",
                                     date: '1/10/22',
                                     departure_city: 'Providence',
                                     arrival_city: 'Denver')
-    @flight_2 = air_2.flights.create!(number: "002",
+    @flight_2 = @air_2.flights.create!(number: "002",
                                     date: '2/11/22',
                                     departure_city: 'Tampa',
                                     arrival_city: 'Denver')
-    @flight_3 = air_3.flights.create!(number: "003",
+    @flight_3 = @air_3.flights.create!(number: "003",
                                     date: '3/12/22',
                                     departure_city: 'Boston',
                                     arrival_city: 'Denver')
-    @flight_4 = air_1.flights.create!(number: "004",
+    @flight_4 = @air_1.flights.create!(number: "004",
                                     date: '4/13/22',
                                     departure_city: 'Hartford',
                                     arrival_city: 'Denver')
-    @flight_5 = air_2.flights.create!(number: "005",
+    @flight_5 = @air_2.flights.create!(number: "005",
                                     date: '5/14/22',
                                     departure_city: 'Denver',
                                     arrival_city: 'Providnce')
@@ -50,11 +50,27 @@ RSpec.describe 'Flights index page' do
       # And under each flight number I see the names of all that flight's passengers
   it 'lists all flight numbers' do
     visit '/flights'
+
     expect(page).to have_content("Flight number: #{@flight_1.number}")
     expect(page).to have_content("Flight number: #{@flight_2.number}")
     expect(page).to have_content("Flight number: #{@flight_3.number}")
     expect(page).to have_content("Flight number: #{@flight_4.number}")
     expect(page).to have_content("Flight number: #{@flight_5.number}")
+  end
+
+  it 'lists the airline number for the flight' do
+    visit '/flights'
+    save_and_open_page
+    within 'flight_001'
+    expect(page).to have_content("Airline: #{@flight_1.airline.name}")
+    within 'flight_002'
+    expect(page).to have_content("Airline: #{@flight_2.airline.name}")
+    within 'flight_003'
+    expect(page).to have_content("Airline: #{@flight_3.airline.name}")
+    within 'flight_004'
+    expect(page).to have_content("Airline: #{@flight_4.airline.name}")
+    within 'flight_005'
+    expect(page).to have_content("Airline: #{@flight_5.airline.name}")
 
   end
 end
