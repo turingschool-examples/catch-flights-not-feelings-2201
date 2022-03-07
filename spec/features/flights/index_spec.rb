@@ -107,6 +107,7 @@ RSpec.describe 'Flights index page' do
 
   it 'has links to remove passengers from a flight' do
     visit '/flights'
+    save_and_open_page
     within 'flight_001'
     click_on("Remove: #{@passenger_1.name}")
     expect(page).to_not have_content(@passenger_1.name)
