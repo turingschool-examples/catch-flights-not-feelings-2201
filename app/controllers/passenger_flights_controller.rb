@@ -1,7 +1,6 @@
 class PassengerFlightsController < ApplicationController
   def delete
-    passenger = Passenger.find(params[:passenger_id])
-    passenger.delete
+    PassengerFlight.find_by(passenger_id: params[:passenger_id], flight_id: params[:id]).destroy
     redirect_to "/flights"
   end
 end
