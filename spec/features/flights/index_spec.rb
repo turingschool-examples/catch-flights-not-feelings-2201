@@ -18,6 +18,8 @@ RSpec.describe "Flight Index Page" do
     @passenger_4 = @flight_3.passengers.create!(name: "John", age: 30)
     @passenger_5 = @flight_3.passengers.create!(name: "Mark", age: 25)
     @passenger_6 = @flight_3.passengers.create!(name: "Spencer", age: 12)
+
+    visit "/flights"
   end
 
   it 'Displays all flight numbers' do
