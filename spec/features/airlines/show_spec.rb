@@ -30,9 +30,9 @@ RSpec.describe 'Airline show page' do
     expect(page).to have_content(two_flight_passenger.name, count: 1)
 
     # display all passengers on this airline
-    expect(page).to have_content(passenger3.name)
-    expect(page).to have_content(passenger4.name)
-    expect(page).to have_content(passenger5.name)
-    expect(page).to have_content(passenger6.name)
+    expect(page).to have_content(passenger3.name, count: 1)
+    expect(page).to have_content(passenger4.name, count: 1)
+    expect(page).to have_content(passenger5.name, count: 1)
+    expect(page).to have_content(passenger6.name, count: 1)
   end
 end
