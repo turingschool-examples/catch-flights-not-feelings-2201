@@ -12,7 +12,7 @@ it  'displays flights attributes' do
     delta = Airline.create!(name: 'Delta')
     flight_2 = delta.flights.create!(number: '2784', date: '01/11/21', departure_city: 'Hawai', arrival_city: 'New York')
     passenger_3 = Passenger.create!(name: 'Luis', age: 29)
-    passenger_4 = Passenger.create!(name: 'Miguel', age: 27)
+    passenger_4 = Passenger.create!(name: 'Miguel', age: 17)
     PassengerFlight.create!(flight_id: flight_2.id, passenger_id: passenger_3.id)
     PassengerFlight.create!(flight_id: flight_2.id, passenger_id: passenger_4.id)
 
@@ -28,15 +28,15 @@ end
 it 'can remove a passenger' do
   frontier = Airline.create!(name: 'Frontier')
   flight_1 = frontier.flights.create!(number: '2563', date: '01/08/22', departure_city: 'Miami', arrival_city: 'Las Vegas')
-  passenger_1 = Passenger.create!(name: 'Josh', age: 19)
-  passenger_2 = Passenger.create!(name: 'Peter', age: 22)
+  passenger_1 = Passenger.create!(name: 'Josh', age: 29)
+  passenger_2 = Passenger.create!(name: 'Peter', age: 27)
   PassengerFlight.create!(flight_id: flight_1.id, passenger_id: passenger_1.id)
   PassengerFlight.create!(flight_id: flight_1.id, passenger_id: passenger_2.id)
 
   delta = Airline.create!(name: 'Delta')
   flight_2 = delta.flights.create!(number: '2784', date: '01/11/21', departure_city: 'Hawai', arrival_city: 'New York')
-  passenger_3 = Passenger.create!(name: 'Luis', age: 37)
-  passenger_4 = Passenger.create!(name: 'Miguel', age: 33)
+  passenger_3 = Passenger.create!(name: 'Luis', age: 29)
+  passenger_4 = Passenger.create!(name: 'Miguel', age: 17)
   PassengerFlight.create!(flight_id: flight_2.id, passenger_id: passenger_3.id)
   PassengerFlight.create!(flight_id: flight_2.id, passenger_id: passenger_4.id)
 

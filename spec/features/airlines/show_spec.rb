@@ -4,24 +4,24 @@ RSpec.describe 'airline show page' do
 
     frontier = Airline.create!(name: 'Frontier')
     flight_1 = frontier.flights.create!(number: '1', date: '1/1/22', departure_city: 'Denver', arrival_city: 'DC')
-    seth = Passenger.create!(name: 'Seth', age: 29)
-    sam = Passenger.create!(name: 'Sam', age: 27)
-    PassengerFlight.create!(flight_id: flight_1.id, passenger_id: seth.id)
-    PassengerFlight.create!(flight_id: flight_1.id, passenger_id: sam.id)
+    luis = Passenger.create!(name: 'Seth', age: 39)
+    peter = Passenger.create!(name: 'Sam', age: 37)
+    PassengerFlight.create!(flight_id: flight_1.id, passenger_id: luis.id)
+    PassengerFlight.create!(flight_id: flight_1.id, passenger_id: peter.id)
 
     flight_2 = frontier.flights.create!(number: '2', date: '1/2/22', departure_city: 'Denver', arrival_city: 'DC')
-    jim = Passenger.create!(name: 'Jim', age: 29)
-    josh = Passenger.create!(name: 'Josh', age: 17)
-    PassengerFlight.create!(flight_id: flight_2.id, passenger_id: jim.id)
-    PassengerFlight.create!(flight_id: flight_2.id, passenger_id: josh.id)
-    PassengerFlight.create!(flight_id: flight_2.id, passenger_id: seth.id)
+    miguel = Passenger.create!(name: 'Jim', age: 22)
+    wali = Passenger.create!(name: 'Josh', age: 17)
+    PassengerFlight.create!(flight_id: flight_2.id, passenger_id: miguel.id)
+    PassengerFlight.create!(flight_id: flight_2.id, passenger_id: wali.id)
+    PassengerFlight.create!(flight_id: flight_2.id, passenger_id: luis.id)
 
     visit "/airlines/#{frontier.id}"
 
 
 
-    expect(page).to have_content("Passengers: #{seth.name} #{sam.name} #{jim.name}")
-    expect(page).to_not have_content(josh.name)
+    expect(page).to have_content("Passengers: #{luis.name} #{peter.name} #{miguel.name}")
+    expect(page).to_not have_content(wali.name)
   end
 
 end
