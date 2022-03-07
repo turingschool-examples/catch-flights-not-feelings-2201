@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  resources :flights
-  resources :flight_passengers
+  resources :flights do
+     resources :passengers, controller: 'flight_passengers'
+   end
 end

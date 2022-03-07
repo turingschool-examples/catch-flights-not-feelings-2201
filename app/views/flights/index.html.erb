@@ -5,7 +5,7 @@
     <p> Passengers :: <% f.passengers.each do |passenger| %>
           <div id="passenger-<%= f.id %>-<%= passenger.id %>">
             <%= passenger.name %>
-            <%= button_to "Remove", "/flight_passengers/#{f.ticket(passenger.id)}", method: :delete %>
+            <%= button_to "Remove", "/flights/#{f.id}/passengers/#{passenger.id}", method: :delete %>
           </div>
       <% end %>
 
