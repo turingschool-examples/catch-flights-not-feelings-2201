@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'flight index page' do
   before(:each) do
-    @southwest = Airline.create!(name: 'Southwest')
+    @southwest = Airline.create!(name: 'Southwest Arlines')
     @united = Airline.create!(name: 'United Airlines')
 
     @flight_1 = @southwest.flights.create!(number: '1234', date: '12/23/21', departure_city: 'Denver', arrival_city: 'Honolulu', airline_id: @southwest.id)
@@ -22,16 +22,16 @@ RSpec.describe 'flight index page' do
     @dwight = @flight_5.passengers.create!(name: 'Dwight Schrute', age: 35)
     @toby = @flight_5.passengers.create!(name: 'Toby Flenderson', age: 35)
 
-    @passenger_flight_1 = PassengerFlight.create!(@flight_1.id, @meghan.id)
-    @passenger_flight_2 = PassengerFlight.create!(@flight_1.id, @bob.id)
-    @passenger_flight_3 = PassengerFlight.create!(@flight_2.id, @phyllis.id)
-    @passenger_flight_4 = PassengerFlight.create!(@flight_2.id, @michael.id)
-    @passenger_flight_5 = PassengerFlight.create!(@flight_3.id, @holly.id)
-    @passenger_flight_6 = PassengerFlight.create!(@flight_3.id, @pam.id)
-    @passenger_flight_7 = PassengerFlight.create!(@flight_4.id, @jim.id)
-    @passenger_flight_8 = PassengerFlight.create!(@flight_4.id, @angela.id)
-    @passenger_flight_9 = PassengerFlight.create!(@flight_5.id, @dwight.id)
-    @passenger_flight_9 = PassengerFlight.create!(@flight_5.id, @toby.id)
+    @passenger_flight_1 = PassengerFlight.create!(flight_id: @flight_1.id, passenger_id: @meghan.id)
+    @passenger_flight_2 = PassengerFlight.create!(flight_id: @flight_1.id, passenger_id: @bob.id)
+    @passenger_flight_3 = PassengerFlight.create!(flight_id: @flight_2.id, passenger_id: @phyllis.id)
+    @passenger_flight_4 = PassengerFlight.create!(flight_id: @flight_2.id, passenger_id: @michael.id)
+    @passenger_flight_5 = PassengerFlight.create!(flight_id: @flight_3.id, passenger_id: @holly.id)
+    @passenger_flight_6 = PassengerFlight.create!(flight_id: @flight_3.id, passenger_id: @pam.id)
+    @passenger_flight_7 = PassengerFlight.create!(flight_id: @flight_4.id, passenger_id: @jim.id)
+    @passenger_flight_8 = PassengerFlight.create!(flight_id: @flight_4.id, passenger_id: @angela.id)
+    @passenger_flight_9 = PassengerFlight.create!(flight_id: @flight_5.id, passenger_id: @dwight.id)
+    @passenger_flight_9 = PassengerFlight.create!(flight_id: @flight_5.id, passenger_id: @toby.id)
 
     visit flights_path
   end
@@ -44,12 +44,37 @@ RSpec.describe 'flight index page' do
     expect(page).to have_content(@flight_5.number)
   end
 
-  it 'shows name of airline next to each flight number' do
-    
-    
+  it 'shows name of airline with flight number' do
+    expect(page).to have_content(@southwest.name)
+    expect(page).to have_content(@united.name)
   end
 
-  it 'shows names of all flights passengers under each flight number' do
-    
+  it 'shows names of all flight passengers under each flight number' do
+    within("#1234") do
+      expect(page).to have_content(@meghan.name)
+      expect(page).to have_content(@bob.name)
+      save_and_open_page
+    end 
+
+    within("#1235") do
+      expect(page).to have_content(@phyllis.name)
+      expect(page).to have_content(@michael.name)
+    end
+
+    within("#1236") do
+      expect(page).to have_content(@holly.name)
+      expect(page).to have_content(@pam.name)
+    end
+
+    within("#1237") do
+      expect(page).to have_content(@jim.name)
+      expect(page).to have_content(@angela.name)
+    end
+
+    within("#1238") do
+      expect(page).to have_content(@dwight.name)
+      expect(page).to have_content(@toby.name)
+    end
+
   end
 end
