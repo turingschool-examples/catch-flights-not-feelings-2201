@@ -7,4 +7,7 @@ class Passenger < ApplicationRecord
   def self.adult
     where('age >= 18').distinct
   end
+
+  def self.frequent_flyers
+  end
 end
