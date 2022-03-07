@@ -6,4 +6,8 @@ class Airline < ApplicationRecord
   def list_all_adult_passengers
     self.passengers.where('age >= 18').distinct
   end
+
+  def frequent_flyers
+    self.passengers.select("passengers.*, count(flights.id) AS flight_count").group("passengers.id").order("flight_count DESC").where("age >= 18").distinct
+  end
 end
