@@ -17,7 +17,7 @@ describe 'flights index page' do
     @flight_pass_3 = FlightPassenger.create!(flight_id: @flight_2.id, passenger_id: @onyx.id)
     @flight_pass_4 = FlightPassenger.create!(flight_id: @flight_2.id, passenger_id: @priska.id)
 
-    visit '/flights'
+    visit flights_path
   end
   it 'I see a list of all flight numbers, the name of the airline and the names of all passengers on that flight' do
 
@@ -30,5 +30,12 @@ describe 'flights index page' do
       expect(page).to have_content("Flight: #{@flight_2.number} Airline: #{@southwest.name}")
       expect(page).to have_content("Passengers: #{@onyx.name} #{@priska.name}")
     end
+
+  end
+  it 'I see a button to remove that passeneger when clicked the passenger is removed' do
+    expect(page).to have_button("Remove #{@gunnar.name}")
+    click_button("Remove #{@gunnar.name}")
+    expect(current_path).to eq(flights_path)
+    expect(page).to_not have_content(@gunnar.name)
   end
 end
