@@ -6,4 +6,7 @@ class Flight < ApplicationRecord
   def add_passenger(passenger)
     passengers << passenger
   end
+  def remove_passenger(passenger)
+    passengers.delete(passenger)
+  end
 end

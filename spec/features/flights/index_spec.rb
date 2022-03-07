@@ -41,4 +41,14 @@ RSpec.describe 'Flights Index' do
             expect(page).to have_content(@passenger_3.name)
         end
     end
+    it 'can remove a passenger from a flight without destroying passenger record' do 
+        visit(flights_path)
+        within "#flight-#{@flight_1.number}" do 
+            expect(page).to have_content(@passenger_1.name)
+            expect(page).to have_button("Remove Passenger")
+            click_button("Remove Passenger")
+        end
+        expect(current_path).to eq(flights_path)
+        expect(page).to_not have_content(@passenger_1.name)
+    end
 end
