@@ -20,10 +20,15 @@ describe 'flights index page' do
     visit '/flights'
   end
   it 'I see a list of all flight numbers, the name of the airline and the names of all passengers on that flight' do
-  
-    expect(page).to have_content("Flight: #{@flight_1.number} Airline: #{@luftansa.name}")
-    expect(page).to have_content("Passengers: #{@gunnar.name} #{@sakic.name}")
-    expect(page).to have_content("Flight: #{@flight_2.number} Airline: #{@southwest.name}")
-    expect(page).to have_content("Passengers: #{@onyx.name} #{@priska.name}")
+
+    within "div.flight-#{@flight_1.id}" do
+      expect(page).to have_content("Flight: #{@flight_1.number} Airline: #{@luftansa.name}")
+      expect(page).to have_content("Passengers: #{@gunnar.name} #{@sakic.name}")
+    end
+
+    within "div.flight-#{@flight_2.id}" do
+      expect(page).to have_content("Flight: #{@flight_2.number} Airline: #{@southwest.name}")
+      expect(page).to have_content("Passengers: #{@onyx.name} #{@priska.name}")
+    end
   end
 end
