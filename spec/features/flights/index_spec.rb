@@ -47,8 +47,8 @@ describe 'flight index page' do
     expect(page).to have_button("Remove #{@bob.name} from flight")
     within "#flight-#{@flight1.id}" do
       click_button("Remove #{@bob.name} from flight")
+      expect(page).to_not have_content(@bob.name)
     end
     expect(current_path).to eq('/flights')
-    # expect(page).to_not have_content(@bob.name) -- this test wont pass, the feature works. im dont sure whats wrong with the test
   end
 end
