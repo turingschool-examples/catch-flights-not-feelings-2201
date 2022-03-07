@@ -1,12 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Flight, type: :model do
-  it { should belong_to :airline }
-  it { should have_many :passenger_flights}
-  it {should have_many(:passengers).through(:passenger_flights)}
-end
-
-describe 'instance methods' do
+RSpec.describe 'airline show page' do
   let!(:southwest) {Airline.create!(name: 'Southwest Arlines')}
   let!(:united) {Airline.create!(name: 'United Airlines')}
 
@@ -32,8 +26,15 @@ describe 'instance methods' do
   let!(:passenger_flight_6) {PassengerFlight.create!(flight_id: flight_3.id, passenger_id: pam.id)}
   let!(:passenger_flight_6) {PassengerFlight.create!(flight_id: flight_3.id, passenger_id: pam2.id)}
   let!(:passenger_flight_7) {PassengerFlight.create!(flight_id: flight_4.id, passenger_id: jim.id)}
-  
-  it 'shows only unique adult passengers' do
-    expect(flight_1.adult_passengers).to eq([meghan])
+
+  before(:each) do
+    visit airline_path(southwest.id)
+  end
+  it 'shows list of unique adult passengers with flights on that airline' do
+    expect(page).to have_content(meghan.name)
+    expect(page).to have_content(michael.name)
+    expect(page).to have_content(pam.name)
+    expect(page).to_not have_content(bob.name)
+    expect(page).to_not have_content(jim.name)
   end
 end
