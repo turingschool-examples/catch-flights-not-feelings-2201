@@ -6,4 +6,9 @@ class Airline < ApplicationRecord
   def adult_passengers
     passengers.select('passengers.*').where('passengers.age >= 18').distinct
   end
+
+  def frequent_flyer
+    binding.pry
+    adult_passengers    
+  end
 end
