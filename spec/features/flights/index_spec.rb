@@ -76,4 +76,26 @@ RSpec.describe 'flights index page' do
       expect(page).to have_content(passenger_5.name)
     end
   end
+
+  it 'can remove a passenger from a flight' do
+    airline_1 = Airline.create!(name: "JetBlue")
+    flight_1 = airline_1.flights.create!(number: 7990, date: "2/7/2022", departure_city: "Glendale", arrival_city: "Dallas")
+    passenger_1 = Passenger.create!(name: "Tina Belcher", age: 13)
+    passenger_2 = Passenger.create!(name: "Bob Belcher", age: 46)
+    PassengerFlight.create!(passenger_id: passenger_1.id, flight_id: flight_1.id)
+    PassengerFlight.create!(passenger_id: passenger_2.id, flight_id: flight_1.id)
+
+    visit "/flights"
+
+    within("#flight-#{flight_1.number}") do
+      expect(page).to have_button("Remove #{passenger_1.name}")
+
+      click_button("Remove #{passenger_1.name}")
+      expect(current_path).to eq("/flights")
+    end
+
+    within("#flight-#{flight_1.number}") do
+      expect(page).to_not have_content(passenger_1.name)
+    end
+  end
 end
