@@ -30,7 +30,7 @@
           null
         ]
       },
-      "/Users/rcl/turing/2module/final_assement/catch-flights-not-feelings-2201/app/models/passenger.rb": {
+      "/Users/rcl/turing/2module/final_assement/catch-flights-not-feelings-2201/app/models/passenger_flight.rb": {
         "lines": [
           1,
           1,
@@ -38,7 +38,7 @@
           null
         ]
       },
-      "/Users/rcl/turing/2module/final_assement/catch-flights-not-feelings-2201/app/models/passenger_flight.rb": {
+      "/Users/rcl/turing/2module/final_assement/catch-flights-not-feelings-2201/app/models/passenger.rb": {
         "lines": [
           1,
           1,
@@ -47,6 +47,6 @@
         ]
       }
     },
-    "timestamp": 1646677304
+    "timestamp": 1646677516
   }
 }
