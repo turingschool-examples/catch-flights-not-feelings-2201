@@ -1,0 +1,13 @@
+flights here<br>
+
+<% @flights.each do |flight|%>
+name<%=flight.airline.name%><br>
+number<%=flight.number%><br>
+passengers:<br>
+
+  <%flight.passengers.each_with_index do |person, index|%>
+
+    <li id='delete<%= index + 1 %>'><%=person.name%><br>
+    <%=button_to "remove passenger", "/flights", method: :delete, params: {:id=> person.passenger_flights.ids.first, flight_id: flight.id} %></li>
+  <% end%>
+<% end%>

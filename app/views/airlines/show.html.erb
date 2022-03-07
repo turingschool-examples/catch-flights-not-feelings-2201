@@ -1,0 +1,7 @@
+Airlines name is <%=@airline.name%>.<br>
+<li id='peeps'>
+<%@airline.find_distinct_adults.each_with_index do |passenger, index|%>
+<%=passenger.name%> is
+<%=passenger.age%> years old<br>
+<%end%>
+<li>
