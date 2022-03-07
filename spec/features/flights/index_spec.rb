@@ -61,5 +61,20 @@ RSpec.describe "Flights Index Page" do
         expect(page).to have_content(passenger2.name)
       end
     end
+
+    it "has a button next to each passenger to remove them from the flight" do
+      airline = Airline.create!(name: "American")
+      flight1 = airline.flights.create!(number: "7990", date: "2/7/2022", departure_city: "Glendale", arrival_city: "Dallas")
+      passenger1 = flight1.passengers.create!(name: 'Tina Belcher', age: 13)
+
+      visit '/flights'
+
+      within "div.flight_#{flight1.id}" do
+        expect(page).to have_content(passenger1.name)
+        click_button "Remove #{passenger1.name}"
+        expect(current_path).to eq('/flights')
+        expect(page).to_not have_content(passenger1.name)
+      end
+    end
   end
 end

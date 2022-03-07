@@ -3,7 +3,7 @@
   <div class=<%= "flight_#{flight.id}" %>>
     <%= flight.number %> <%= flight.airline.name %>
     <% flight.passengers.each do |passenger| %>
-      <%= passenger.name %>
+      <%= passenger.name %> <%= button_to "Remove #{passenger.name}", "/flights/#{flight.id}/#{passenger.id}", method: :patch %>
     <% end %>
   </div>
 <% end %>
