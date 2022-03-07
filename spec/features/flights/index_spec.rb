@@ -31,11 +31,10 @@ RSpec.describe 'The Flights Index' do
                                                 flight_id: @flight2.id)
     @flight_passenger5 = FlightPassenger.create!(passenger_id: @passenger5.id,
                                                 flight_id: @flight3.id)
+    visit flights_path
   end
 
   it "lists all flight numbers" do
-    visit flights_path
-
     within '#flights-0' do
       expect(page).to have_content(@flight1.number)
       expect(page).to_not have_content(@flight2.number)
@@ -56,6 +55,30 @@ RSpec.describe 'The Flights Index' do
       expect(page).to_not have_content(@airline1.name)
       expect(page).to have_content(@passenger5.name)
     end
+  end
+
+  it "has a button to remove passengers from a flight" do
+    within '#flights-0' do
+      within '#passengers-0' do
+        expect(page).to have_link("Remove Passenger")
+      end
+      within '#passengers-1' do
+        expect(page).to have_link("Remove Passenger")
+      end
+    end
+  end
+
+  it "when remove passenger is clicked that passenger is no longer
+  under that flight" do
+  within '#flights-0' do
+    within '#passengers-0' do
+      expect(page).to have_content(@passenger1.name)
+      click_on "Remove Passenger"
+    end
+    within '#passengers-0' do
+      expect(page).to_not have_content(@passenger1.name)
+    end
+  end
   end
 
 end

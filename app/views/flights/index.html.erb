@@ -6,8 +6,10 @@
   <%= flight.number %>
   <%= flight.airline_name %>
   </p>
-  <p>Passengers: <% flight.passengers.each do |passenger| %>
+  <p>Passengers: <% flight.passengers.each_with_index do |passenger, index| %>
+  <div id="passengers-<%= index %>">
     <%= passenger.name %>
+  </div>
   <% end %>
   </p>
 </div>
