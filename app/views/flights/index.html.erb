@@ -1,10 +1,13 @@
 <% @flights.each do |f| %>
-  <div id="flight-<%= f.id %>"
+  <div id="flight-<%= f.id %>">
     <p> Flight Number :: <%= f.number %> </p>
     <p> Airline :: <%= f.airline.name %> </p>
-    <p> Passengers :: <% f.get_passenger_names.each do |name| %>
-        <%= name %>
+    <p> Passengers :: <% f.passengers.each do |passenger| %>
+          <div id="passenger-<%= f.id %>-<%= passenger.id %>">
+            <%= passenger.name %>
+            <%= button_to "Remove", "/flight_passengers/#{f.ticket(passenger.id)}", method: :delete %>
+          </div>
       <% end %>
-    </p>
+
   </div>
 <% end %>

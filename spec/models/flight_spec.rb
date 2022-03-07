@@ -24,7 +24,7 @@ describe 'class / instance methods' do
     @passenger4 = Passenger.create!(name: "Linda Belcher", age: 44)
     @passenger5 = Passenger.create!(name: "Linda Belcher", age: 84)
 
-    FlightPassenger.create!(passenger: @passenger1, flight: @flight1)
+    @fp1 = FlightPassenger.create!(passenger: @passenger1, flight: @flight1)
     FlightPassenger.create!(passenger: @passenger2, flight: @flight1)
     FlightPassenger.create!(passenger: @passenger3, flight: @flight2)
     FlightPassenger.create!(passenger: @passenger4, flight: @flight2)
@@ -34,11 +34,9 @@ describe 'class / instance methods' do
     FlightPassenger.create!(passenger: @passenger3, flight: @flight4)
     FlightPassenger.create!(passenger: @passenger4, flight: @flight5)
     FlightPassenger.create!(passenger: @passenger5, flight: @flight5)
-
   end
 
-  it 'get_passenger_names' do
-
-    expect(@flight1.get_passenger_names).to eq([@passenger1.name, @passenger2.name])
+  it 'ticket(passenger_id)' do
+    expect(@flight1.ticket(@passenger1.id)).to eq(@fp1)
   end
 end

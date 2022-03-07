@@ -3,4 +3,5 @@ class Passenger < ApplicationRecord
   has_many :flights, through: :flight_passengers
   validates :name, presence: true
   validates :age, presence: true
+
 end

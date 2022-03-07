@@ -3,7 +3,7 @@ class Flight < ApplicationRecord
   has_many :flight_passengers
   has_many :passengers, through: :flight_passengers
 
-  def get_passenger_names
-    passengers.pluck(:name)
+  def ticket(passenger_id)
+    flight_passengers.where('passenger_id = ?', passenger_id).first
   end
 end

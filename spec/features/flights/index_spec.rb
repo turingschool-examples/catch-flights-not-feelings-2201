@@ -42,14 +42,6 @@ RSpec.describe "Flights Index" do
     expect(page).to have_content(@flight4.number)
     expect(page).to have_content(@flight5.number)
   end
-  it 'shows a list of all flight numbers' do
-
-    expect(page).to have_content(@flight1.number)
-    expect(page).to have_content(@flight2.number)
-    expect(page).to have_content(@flight3.number)
-    expect(page).to have_content(@flight4.number)
-    expect(page).to have_content(@flight5.number)
-  end
 
   it 'shows airline name of flight' do
     within("#flight-#{@flight1.id}") do
@@ -74,6 +66,12 @@ RSpec.describe "Flights Index" do
       expect(page).to have_content(@passenger3.name)
       expect(page).to have_content(@passenger4.name)
       expect(page).to_not have_content(@passenger5.name)
+    end
+  end
+
+  it 'shows remove passenger button' do
+    within("#passenger-#{@flight1.id}-#{@passenger1.id}") do
+      expect(page).to have_button("Remove")
     end
   end
 end
