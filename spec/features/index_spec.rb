@@ -77,7 +77,6 @@ RSpec.describe 'Flight Index Page', type: :feature do
     it 'has a link to remove a passenger from the flight' do
 
       visit flights_path
-
       within("#flight-0") do
 
         expect(page).to have_content(@flight1.number)
@@ -85,8 +84,9 @@ RSpec.describe 'Flight Index Page', type: :feature do
         expect(page).to have_content(@pass1.name)
 
         expect(page).to have_content("Remove #{@pass1.name} from this flight")
-        click_button 'Save'
+        click_link "Remove #{@pass1.name} from this flight"
         expect(current_path).to eq(flights_path)
+
 
         within("#flight-0") do
           expect(page).to_not have_content(@pass1.name)
