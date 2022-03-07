@@ -20,8 +20,5 @@ RSpec.describe "Airline Show Page" do
       expect(page).to have_content(passenger4.name)
       expect(page).to have_content(passenger5.name)
     end
-
-
-
   end
 end
