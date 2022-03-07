@@ -4,6 +4,8 @@ class Airline < ApplicationRecord
   has_many :passengers, through: :flight_passengers
 
   def adult_passengers
-    passengers.return_adults
+    passengers
+    .where('passengers.age > ?', 17)
+    .group(:id)
   end 
 end
