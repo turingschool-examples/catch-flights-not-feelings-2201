@@ -1,11 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Airline, type: :model do
-  it {should have_many :flights}
-  it {should have_many(:passengers).through(:flights)}
-end
-
-describe 'class / instance methods' do
+RSpec.describe "Airline Show" do
   before :each do
     @airline1 = Airline.create!(name: "American")
     @airline2 = Airline.create!(name: "Delta")
@@ -18,16 +13,19 @@ describe 'class / instance methods' do
     @flight3 = Flight.create!(number: 9091, date: "5/17/2022", departure_city: "Chicago", arrival_city: "Kansas City", airline: @airline2)
     @flight4 = Flight.create!(number: 6798, date: "10/9/2022", departure_city: "Tulsa", arrival_city: "Fresno", airline: @airline2)
     @flight5 = Flight.create!(number: 9665, date: "11/22/2022", departure_city: "Durham", arrival_city: "New Orleans", airline: @airline2)
+    @flight6 = Flight.create!(number: 9665, date: "11/22/2022", departure_city: "Durham", arrival_city: "New Orleans", airline: @airline1)
 
     @passenger1 = Passenger.create!(name: "Tina Belcher", age: 13)
     @passenger2 = Passenger.create!(name: "Louise Belcher", age: 9)
-    @passenger3 = Passenger.create!(name: "Bob Belcher", age: 46)
-    @passenger4 = Passenger.create!(name: "Linda Belcher", age: 44)
+    @passenger3 = Passenger.create!(name: "Linda Belcher", age: 44)
+    @passenger4 = Passenger.create!(name: "Bob Belcher", age: 46)
     @passenger5 = Passenger.create!(name: "Big Bob", age: 84)
 
     FlightPassenger.create!(passenger: @passenger1, flight: @flight1)
     FlightPassenger.create!(passenger: @passenger2, flight: @flight1)
     FlightPassenger.create!(passenger: @passenger3, flight: @flight2)
+    FlightPassenger.create!(passenger: @passenger3, flight: @flight6)
+    FlightPassenger.create!(passenger: @passenger3, flight: @flight1)
     FlightPassenger.create!(passenger: @passenger4, flight: @flight2)
     FlightPassenger.create!(passenger: @passenger5, flight: @flight3)
     FlightPassenger.create!(passenger: @passenger1, flight: @flight3)
@@ -35,9 +33,20 @@ describe 'class / instance methods' do
     FlightPassenger.create!(passenger: @passenger3, flight: @flight4)
     FlightPassenger.create!(passenger: @passenger4, flight: @flight5)
     FlightPassenger.create!(passenger: @passenger5, flight: @flight5)
+
+    visit "/airlines/#{@airline1.id}"
   end
 
-  it 'adult_passengers' do
-    expect(@airline1.adult_passengers).to eq([@passenger3, @passenger4])
+  it 'shows list of adult passengers' do
+    expect(page).to have_content(@passenger3.name)
+    expect(page).to have_content(@passenger4.name)
+    expect(page).to_not have_content(@passenger1.name)
+    expect(page).to_not have_content(@passenger5.name)
+  end
+
+  xit 'frequent flyers sorting' do
+    within("#passenger-0") do
+      expect(page).to have_content(@passenger3.name)
+    end
   end
 end

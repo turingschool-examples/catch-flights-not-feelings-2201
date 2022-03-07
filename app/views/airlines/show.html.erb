@@ -1,0 +1,9 @@
+<%= @airline.name %>
+
+<p> Adult Passengers </p>
+<% @airline.adult_passengers.each_with_index do |passenger, index| %>
+  <div id="passenger-<%=index%>"
+     <p> Passenger Name ::  <%= passenger.name %> </p>
+     <p> Passsenger Age :: <%= passenger.age %> <p>
+  </div>
+<% end %>
