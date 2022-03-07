@@ -1,0 +1,6 @@
+<h1>Airline show page</h1>
+
+<% @airline.uniq_passengers.each do |passenger| %>
+  <p>Passenger name: <%= passenger.name %></p>
+  <p>Passenger age: <%= passenger.age %></p>
+<% end %>
