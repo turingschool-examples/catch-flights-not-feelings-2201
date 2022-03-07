@@ -1,0 +1,9 @@
+<%= @flights.each_with_index do |flight, index|  %>
+<div id="flight-<%= index %>">
+  <h1><p>Flight Number: <%= flight.number %>  Airline: <%= flight.airline_name %></p><br></h1>
+  <h2>Passengers:</h2>
+    <p><% flight.all_passengers. each do | passenger | %></p>
+      <p><%= passenger.name %></p><br><br>
+    <% end  %>
+  </div>
+<% end %>

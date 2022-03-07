@@ -30,7 +30,7 @@ RSpec.describe 'Flight Index Page', type: :feature do
 
     it 'will display flight numbers with the airline name and coorsponding passengers' do
       visit flights_path
-
+save_and_open_page
       within("#flight-0") do
 
         expect(page).to have_content(@flight1.number)
@@ -39,7 +39,7 @@ RSpec.describe 'Flight Index Page', type: :feature do
         expect(page).to have_content(@pass3.name)
         expect(page).to have_content(@pass4.name)
 
-        expect(page).to_not have_content(@flight2.name)
+        expect(page).to_not have_content(@flight2.number)
       end
 
       within("#flight-1") do
@@ -48,7 +48,7 @@ RSpec.describe 'Flight Index Page', type: :feature do
         expect(page).to have_content(@flight2.airline_name)
         expect(page).to have_content(@pass2.name)
 
-        expect(page).to_not have_content(@flight1.name)
+        expect(page).to_not have_content(@flight3.number)
       end
 
       within("#flight-2") do
@@ -58,7 +58,7 @@ RSpec.describe 'Flight Index Page', type: :feature do
         expect(page).to have_content(@pass1.name)
         expect(page).to have_content(@pass5.name)
 
-        expect(page).to_not have_content(@flight2.name)
+        expect(page).to_not have_content(@flight2.number)
       end
 
       within("#flight-3") do
@@ -68,11 +68,11 @@ RSpec.describe 'Flight Index Page', type: :feature do
         expect(page).to have_content(@pass2.name)
         expect(page).to have_content(@pass5.name)
 
-        expect(page).to_not have_content(@flight2.name)
+        expect(page).to_not have_content(@flight2.number)
       end
-    end 
     end
   end
+end
 # end
 # expect(page).to have_link()
 #
