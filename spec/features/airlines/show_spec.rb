@@ -14,7 +14,7 @@ describe 'flights index page' do
 
     @airline_2 = Airline.create!(name: 'Delta')
 
-    @flight_2 = @airline_2.flights.create!(number: '2', date: '3/8/22', departure_city: 'DC', arrival_city: 'LA')
+    @flight_2 = @airline_1.flights.create!(number: '2', date: '3/8/22', departure_city: 'DC', arrival_city: 'LA')
 
     @passenger_3 = Passenger.create!(name: 'Alice', age: 2)
     @passenger_4 = Passenger.create!(name: 'Maggie', age: 29)

@@ -19,7 +19,7 @@ RSpec.describe Airline, type: :model do
       @flight_passenger_2 = FlightPassenger.create!(flight_id: @flight_1.id, passenger_id: @passenger_2.id)
       @airline_2 = Airline.create!(name: 'Delta')
 
-      @flight_2 = @airline_2.flights.create!(number: '2', date: '3/8/22', departure_city: 'DC', arrival_city: 'LA')
+      @flight_2 = @airline_1.flights.create!(number: '2', date: '3/8/22', departure_city: 'DC', arrival_city: 'LA')
 
       @passenger_3 = Passenger.create!(name: 'Alice', age: 2)
       @passenger_4 = Passenger.create!(name: 'Maggie', age: 29)
@@ -29,8 +29,8 @@ RSpec.describe Airline, type: :model do
 
       @passenger_5 = Passenger.create!(name: 'Martin', age: 55)
 
-      a_passengers = [@passenger_2, @passenger_4]
-      expect(@airline_1.adult_passengers).to eq(@a_passengers)
+
+      expect(@airline_1.adult_passengers).to eq([@passenger_2, @passenger_4])
 
     end
   end

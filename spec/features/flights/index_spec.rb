@@ -21,6 +21,8 @@ describe 'flights index page' do
 
     @flight_passenger_3 = FlightPassenger.create!(flight_id: @flight_2.id, passenger_id: @passenger_3.id)
     @flight_passenger_4 = FlightPassenger.create!(flight_id: @flight_2.id, passenger_id: @passenger_4.id)
+
+    @passenger_5 = Passenger.create!(name: 'Martin', age: 55)
     visit '/flights'
   end
 
@@ -29,11 +31,11 @@ describe 'flights index page' do
     expect(page).to have_content("Flight: #{@flight_1.number}")
     expect(page).to have_content("Airline: #{@airline_1.name}")
     expect(page).to have_content("Passengers: #{@passenger_1.name}")
-    expect(page).to have_content("Passengers: #{@passenger_2.name}")
+    expect(page).to have_content("#{@passenger_2.name}")
     expect(page).to have_content("Flight: #{@flight_2.number}")
     expect(page).to have_content("Airline: #{@airline_2.name}")
     expect(page).to have_content("Passengers: #{@passenger_3.name}")
-    expect(page).to have_content("Passengers: #{@passenger_4.name}")
+    expect(page).to have_content("#{@passenger_4.name}")
   end
 
   it 'I see a button that can remove passenger from flight (not destroy passenger)' do
