@@ -1,3 +1,8 @@
+# Mark's Comments
+- completed User Stories 1, 2, 3
+- did not attempt the extension
+- feel good about the work done, could have done the extension with more time.
+
 # B2 Assessments
 
 Base repository for B2 assessments and diagnostics.

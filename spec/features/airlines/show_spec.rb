@@ -1,9 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Airline, type: :model do
-  it { should have_many :flights }
+RSpec.describe "Airline Show:", type: :feature do
 
-  it 'gives all adult passengers' do
+  it 'lists all adult passengers' do
     airline1 = Airline.create(name: "American")
     # 2 adults on flight1
     flight1 = airline1.flights.create(number: "7990", date: "2/7/2022", departure_city: "Glendale", arrival_city: "Dallas")
@@ -26,12 +25,14 @@ RSpec.describe Airline, type: :model do
     flight3 = airline2.flights.create(number: "6666", date: "3/7/2022", departure_city: "Poughkeepsie", arrival_city: "Houston")
     passenger6 = Passenger.create(name: "Clem Belcher", age: 50)
 
-    expected = [passenger2.name, passenger3.name, passenger5.name]
+    visit "/airlines/#{airline1.id}"
 
-    actual = airline1.all_adult_passengers.map do |passenger|
-      passenger.name
-    end
+    expect(page).to have_content(passenger2.name)
+    expect(page).to have_content(passenger3.name, count: 1)
+    expect(page).to have_content(passenger5.name)
 
-    expect(actual).to eq(expected)
+    expect(page).to_not have_content(passenger1.name)
+    expect(page).to_not have_content(passenger4.name)
+    expect(page).to_not have_content(passenger6.name)
   end
 end
