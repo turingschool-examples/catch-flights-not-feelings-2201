@@ -50,5 +50,6 @@ RSpec.describe 'Flights Index' do
         end
         expect(current_path).to eq(flights_path)
         expect(page).to_not have_content(@passenger_1.name)
+        expect(@passenger_1.valid?).to be true
     end
 end
