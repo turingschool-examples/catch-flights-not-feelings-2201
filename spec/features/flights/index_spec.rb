@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Flights Index" do
+RSpec.describe "Flights Index" do
   before :each do
     @airline1 = Airline.create!(name: "American")
     @airline2 = Airline.create!(name: "Delta")
@@ -18,7 +18,7 @@ describe "Flights Index" do
     @passenger2 = Passenger.create!(name: "Louise Belcher", age: 9)
     @passenger3 = Passenger.create!(name: "Bob Belcher", age: 46)
     @passenger4 = Passenger.create!(name: "Linda Belcher", age: 44)
-    @passenger5 = Passenger.create!(name: "Linda Belcher", age: 84)
+    @passenger5 = Passenger.create!(name: "Big Bob", age: 84)
 
     FlightPassenger.create!(passenger: @passenger1, flight: @flight1)
     FlightPassenger.create!(passenger: @passenger2, flight: @flight1)
@@ -34,6 +34,14 @@ describe "Flights Index" do
     visit '/flights'
   end
 
+  it 'shows a list of all flight numbers' do
+
+    expect(page).to have_content(@flight1.number)
+    expect(page).to have_content(@flight2.number)
+    expect(page).to have_content(@flight3.number)
+    expect(page).to have_content(@flight4.number)
+    expect(page).to have_content(@flight5.number)
+  end
   it 'shows a list of all flight numbers' do
 
     expect(page).to have_content(@flight1.number)
@@ -68,3 +76,4 @@ describe "Flights Index" do
       expect(page).to_not have_content(@passenger5.name)
     end
   end
+end

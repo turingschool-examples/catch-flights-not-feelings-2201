@@ -12,11 +12,12 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
-  gem 'pry'
-  gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'pry'
+  gem 'rspec-rails', '~> 4.0.1'
   gem 'shoulda-matchers'
+  gem 'simplecov'
 end
 
 group :development do
