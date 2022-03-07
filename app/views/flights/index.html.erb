@@ -4,6 +4,7 @@
     <%= flight.airline.name %>
     <% flight.passengers.each do |passenger| %>
       <%= passenger.name %>
+      <%= button_to "Remove #{passenger.name}", flight_passenger_path(passenger.id),  method: :delete%>
     <% end %>
   </section>
 <% end %>
