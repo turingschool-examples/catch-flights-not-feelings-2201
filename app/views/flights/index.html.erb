@@ -7,7 +7,10 @@
   <li> <%= flight.airline.name %> </li>
   <h3> Passengers: </h3>
   <% flight.passengers.each do |passenger| %>
-  <li> <%= passenger.name %> </li>
+  <div class="passenger-<%= "#{passenger.id}" %>">
+    <li> <%= passenger.name %> </li>
+    <%= link_to "Remove #{passenger.name}", "/flights/#{flight.id}/passengers/#{passenger.id}", :method => :delete %>
+  </div>
   <% end %>
 </div>
 <% end %>
