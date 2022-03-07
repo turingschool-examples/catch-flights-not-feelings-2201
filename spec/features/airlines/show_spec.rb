@@ -18,10 +18,15 @@ RSpec.describe 'airlines show' do
 
     @fp1 = FlightPassenger.create!(flight: @flight1, passenger: @passenger1)
     @fp2 = FlightPassenger.create!(flight: @flight1, passenger: @passenger2)
-    @fp3 = FlightPassenger.create!(flight: @flight2, passenger: @passenger1)
-    @fp4 = FlightPassenger.create!(flight: @flight2, passenger: @passenger3)
+    @fp2 = FlightPassenger.create!(flight: @flight1, passenger: @passenger3)
+    @fp2 = FlightPassenger.create!(flight: @flight1, passenger: @passenger4)
+    @fp3 = FlightPassenger.create!(flight: @flight2, passenger: @passenger3)
+    @fp4 = FlightPassenger.create!(flight: @flight2, passenger: @passenger4)
     @fp5 = FlightPassenger.create!(flight: @flight3, passenger: @passenger4)
+    @fp6 = FlightPassenger.create!(flight: @flight4, passenger: @passenger3)
     @fp6 = FlightPassenger.create!(flight: @flight4, passenger: @passenger4)
+    @fp6 = FlightPassenger.create!(flight: @flight4, passenger: @passenger5)
+    @fp7 = FlightPassenger.create!(flight: @flight5, passenger: @passenger4)
     @fp7 = FlightPassenger.create!(flight: @flight5, passenger: @passenger5)
     visit airline_path(@airline1)
   end
@@ -38,5 +43,14 @@ RSpec.describe 'airlines show' do
   it 'list only includes adult passengers' do
      expect(page).to_not have_content(@passenger1.name)
      expect(page).to_not have_content(@passenger2.name)
+  end
+  describe 'frequent flyers' do 
+    it 'list of passengers is sorted by number of flights each passenger has taken on airline' do 
+      expect(@passenger4.name).to appear_before(@passenger3.name)
+      expect(@passenger4.name).to appear_before(@passenger5.name)
+      expect(@passenger3.name).to appear_before(@passenger5.name)
+      expect(@passenger5.name).to_not appear_before(@passenger3.name)
+      expect(@passenger5.name).to_not appear_before(@passenger4.name)
+    end
   end
 end 
