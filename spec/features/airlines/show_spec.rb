@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'The Airline Show Page' do
-  before(:each) do
+  it "has a unique list of all its passenger's names over 18" do
     @airline1 = Airline.create!(name: "Southwest")
     @flight1 = @airline1.flights.create!(number: 123,
                                         date: "12/12/21",
@@ -31,13 +31,11 @@ RSpec.describe 'The Airline Show Page' do
                                                 flight_id: @flight3.id)
 
     visit airline_path(@airline1)
-  end
-
-  it "has a unique list of all its passenger's names over 18" do
+    
     expect(page).to have_content(@passenger1.name)
     expect(page).to have_content(@passenger2.name)
     expect(page).to_not have_content(@passenger3.name)
-    expect(page).to_not have_content(@passenger4.name)
+    expect(page).to have_content(@passenger4.name)
   end
 
 end
