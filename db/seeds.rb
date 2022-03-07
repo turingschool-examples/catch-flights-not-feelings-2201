@@ -1,3 +1,8 @@
+Flight.destroy_all
+Passenger.destroy_all
+PassengerFlight.destroy_all
+Airline.destroy_all
+
 american = Airline.create!(name: 'American')
 delta = Airline.create!(name: 'Delta')
 jet_blue = Airline.create!(name: 'Jet Blue')
@@ -18,3 +23,8 @@ louise = Passenger.create!(name: 'Louise', age: 9)
 bob = Passenger.create!(name: 'Bob', age: 46)
 linda = Passenger.create!(name: 'Linda', age: 44)
 big_bob = Passenger.create!(name: 'Big Bob', age: 84)
+passenger_flight_1 = PassengerFlight.create!(flight_id: flight1.id, passenger_id: bob.id)
+passenger_flight_2 = PassengerFlight.create!(flight_id: flight1.id, passenger_id: linda.id)
+passenger_flight_3 = PassengerFlight.create!(flight_id: flight3.id, passenger_id: big_bob.id)
+passenger_flight_4 = PassengerFlight.create!(flight_id: flight5.id, passenger_id: tina.id)
+passenger_flight_5 = PassengerFlight.create!(flight_id: flight5.id, passenger_id: linda.id)
