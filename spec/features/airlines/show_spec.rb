@@ -1,9 +1,5 @@
 require 'rails_helper'
-
-RSpec.describe Airline, type: :model do
-  it { should have_many :flights }
-  it { should have_many(:passengers).through(:flights) }
-
+describe 'airline show page' do
   before do
     @american = Airline.create!(name: 'American')
     @delta = Airline.create!(name: 'Delta')
@@ -32,9 +28,11 @@ RSpec.describe Airline, type: :model do
     @passenger_flight_3 = PassengerFlight.create!(flight_id: @flight4.id, passenger_id: @louise.id)
     @passenger_flight_4 = PassengerFlight.create!(flight_id: @flight5.id, passenger_id: @tina.id)
     @passenger_flight_5 = PassengerFlight.create!(flight_id: @flight5.id, passenger_id: @linda.id)
+    visit "/airlines/#{@united.id}"
   end
-
-  it 'adult passengers' do
-    expect(@united.adult_passengers.map { |passenger| passenger.name }).to eq([@bob.name, @linda.name])
+  it 'shows me a list of all the passengers with that airline with no duplicates and only adults' do
+    expect(page).to have_content("Adult Passengers: #{@bob.name} #{@linda.name}")
+    expect(page).to_not have_content(@tina.name)
+    expect(page).to_not have_content(@louise.name)
   end
 end
