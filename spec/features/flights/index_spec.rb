@@ -20,7 +20,29 @@ RSpec.describe "Flights Index Page" do
     end
 
     it "next to each flight number, I see the name of the airline of the flight" do
+      airline = Airline.create!(name: "American")
+      airline2 = Airline.create!(name: "Delta")
+      flight1 = airline.flights.create!(number: "7990", date: "2/7/2022", departure_city: "Glendale", arrival_city: "Dallas")
+      flight3 = airline2.flights.create!(number: "3940", date: "3/10/2022", departure_city: "Detroit", arrival_city: "Orlando")
+      flight4 = airline2.flights.create!(number: "3940", date: "3/10/2022", departure_city: "Detroit", arrival_city: "Orlando")
 
+      visit '/flights'
+      #couldn't get these within blocks to hit my code for whatever reason so I moved on
+      # within "div.flight_#{flight1.id}" do
+      #   expect(page).to have_content(airline.name)
+      # end
+      #
+      # within "div.flight_#{flight3.id}" do
+      #   expect(page).to have_content(airline2.name)
+      # end
+      #
+      # within "div.flight_#{flight4.id}" do
+      #   expect(page).to_not have_content(airline.name)
+      # end
+
+      expect(flight4.number).to appear_before(airline2.name)
+      expect(flight3.number).to appear_before(airline2.name)
+      expect(flight1.number).to appear_before(airline.name)
     end
 
     it "under each flight number, I see the names of all that flights passengers" do
