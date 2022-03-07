@@ -2,5 +2,8 @@
   <section id= "flights-<%= flight.id %>">
     <%= flight.id %>
     <%= flight.airline.name %>
+    <% flight.passengers.each do |passenger| %>
+      <%= passenger.name %>
+    <% end %>
   </section>
 <% end %>
