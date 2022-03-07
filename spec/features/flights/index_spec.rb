@@ -25,10 +25,12 @@ describe 'flights index page' do
   end
 
   it "shows list of flight numbers, airline name, and list of passengers " do
-
-    expect(page).to have_content("Flight: #{@flight_1.number} Airline: #{@airline_1.name}")
-    expect(page).to have_content("Passengers: #{@passenger_1.name} #{@passenger_2.name}")
-    expect(page).to have_content("Flight: #{@flight_2.number} Airline: #{@airline_2.name}")
-    expect(page).to have_content("Passengers: #{@passenger_3.name} #{@passenger_4.name}")
+    save_and_open_page
+    expect(page).to have_content("Flight: #{@flight_1.number}")
+    expect(page).to have_content("Airline: #{@airline_1.name}")
+    expect(page).to have_content("Passengers: #{@passenger_1.name}, #{@passenger_2.name}")
+    expect(page).to have_content("Flight: #{@flight_2.number}")
+    expect(page).to have_content("Airline: #{@airline_2.name}")
+    expect(page).to have_content("Passengers: #{@passenger_3.name}, #{@passenger_4.name}")
   end
 end
