@@ -1,6 +1,6 @@
 <h1>All Flights By Number</h1>
 <% @flights.each do |flight| %>
-  <div class=<% "flight_#{flight.id}" %>>
+  <div class=<%= "flight_#{flight.id}" %>>
     <%= flight.number %> <%= flight.airline.name %>
   </div>
 <% end %>
