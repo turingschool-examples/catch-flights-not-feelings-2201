@@ -6,7 +6,7 @@ RSpec.describe Airline, type: :model do
   end
 
   describe 'methods' do
-    describe '::uniq_adult_passengers' do
+    before(:each) do
       @airline = Airline.create!(name: "Delta Airlines")
 
       @flight = @airline.flights.create!(number: 1395, date: "03/9/2022", departure_city: "Washington", arrival_city: "Powell")
@@ -16,8 +16,11 @@ RSpec.describe Airline, type: :model do
       @passenger_2 = @flight.passengers.create!(name: "Little Joey", age: 16)
 
       @passenger_3 = @flight_2.passengers.create!(name: "Hubert", age: 21)
+    end
 
+    it '::uniq_adult_passengers' do
       expect(@airline.uniq_adult_passengers).to eq([@passenger.name, @passenger_3.name])
     end
+
   end
  end
