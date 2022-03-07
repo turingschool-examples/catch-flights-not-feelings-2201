@@ -1,0 +1,9 @@
+<h2>Flight Numbers</h2>
+<% @flights.each do |flight| %>
+  <% @airlines.each do |airline| %>
+    <% if airline.id == flight.airline_id %>
+      <%= flight.number %>
+      <%= airline.name %><br></br>
+      <% end %>
+    <% end %>
+<% end %>

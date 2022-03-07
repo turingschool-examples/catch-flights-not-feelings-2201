@@ -17,10 +17,10 @@ RSpec.describe 'flight index page' do
     @passenger3  = Passenger.create(name: "Loki", age: 19)
     @passenger4  = Passenger.create(name: "Apollo", age: 14)
     @passenger5  = Passenger.create(name: "Ian", age: 18)
-  end
 
+    visit flights_path
+  end
   it 'shows every flight number' do
-    expect(page).to have_content("Flight Numbers")
     expect(page).to have_content(@flight1.number)
     expect(page).to have_content(@flight2.number)
     expect(page).to have_content(@flight3.number)
@@ -28,16 +28,8 @@ RSpec.describe 'flight index page' do
     expect(page).to have_content(@flight5.number)
   end
   it 'shows every airline name' do
-    expect(page).to have_content("Flight Airline")
     expect(page).to have_content(@airline1.name)
     expect(page).to have_content(@airline2.name)
     expect(page).to have_content(@airline3.name)
-  end
-  it 'shows every passanger name' do
-    expect(page).to have_content(@passanger1.name)
-    expect(page).to have_content(@passanger2.name)
-    expect(page).to have_content(@passanger3.name)
-    expect(page).to have_content(@passanger4.name)
-    expect(page).to have_content(@passanger5.name)
   end
 end
