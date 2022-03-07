@@ -105,4 +105,19 @@ RSpec.describe "Flights Index:", type: :feature do
       expect(page).to_not have_content(@passenger5.name)
     end
   end
+
+  it 'removes a passenger from the flight' do
+    visit("/flights")
+
+    within("#flight-#{@flight1.id}") do
+      within("#passenger-#{@passenger1.id}")do
+        click_button("remove")
+      end
+    end
+
+    expect(current_path).to eq("/flights")
+    within("#flight-#{@flight1.id}") do
+      expect(page).to_not have_content(@passenger1.name)
+    end
+  end
 end
