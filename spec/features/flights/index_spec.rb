@@ -18,12 +18,18 @@ RSpec.describe 'Flights Index Page' do
 
   it 'lists all flight numbers, as well as the name of the airline the flight belongs to' do 
     visit flights_path
-    save_and_open_page
-    expect(page).to have_content(@american.name)
-    expect(page).to have_content(@delta.name)
+    within "#flights-#{@flight1.id}" do
+      expect(page).to have_content(@american.name)
+      expect(page).to have_content(@flight1.id)
+    end 
+    within "#flights-#{@flight2.id}" do
+      expect(page).to have_content(@american.name)
+      expect(page).to have_content(@flight2.id)
+    end 
+    within "#flights-#{@flight3.id}" do
+      expect(page).to have_content(@delta.name)
+      expect(page).to have_content(@flight3.id)
+    end 
     expect(page).to have_no_content(@smelta.name)
-    expect(page).to have_content(@flight1.id)
-    expect(page).to have_content(@flight2.id)
-    expect(page).to have_content(@flight3.id)
   end
 end 

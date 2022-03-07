@@ -1,0 +1,6 @@
+<% @flights.each_with_index do |flight, index| %> 
+  <section id= "flights-<%= flight.id %>">
+    <%= flight.id %>
+    <%= flight.airline.name %>
+  </section>
+<% end %>
