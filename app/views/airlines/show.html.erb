@@ -1,0 +1,9 @@
+<h1> <%= "#{@airline.name}" %> </h1>
+
+<h2> Passengers </h2>
+
+<% @airline.frequent_flyers.each_with_index do |passenger, index|%>
+<div class="passenger-<%= "#{index}" %>"
+  <li> <%= passenger.name %> </li>
+</div>
+<% end %>
