@@ -1,4 +1,12 @@
 <p>Flight Numbers:</p>
 <% @flights.each do |flight| %>
-  <%= flight.number %><br>
+  <%= flight.number %>, 
+    <% @airlines.each do |airline| %><br>
+      <% if flight.airline_id == airline.id %>
+        <%= airline.name %>
+      <% end %>
+    <% end %>
+  <% flight.passengers.each do |passenger| %>
+    <%= passenger.name %> <br>
+  <% end %><br><br>
 <% end %>
