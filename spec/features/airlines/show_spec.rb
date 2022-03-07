@@ -1,11 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Airline, type: :model do
-  it {should have_many :flights}
-  it {should have_many(:passengers).through(:flights)}
-end
-
-describe 'class / instance methods' do
+RSpec.describe "Airline Show" do
   before :each do
     @airline1 = Airline.create!(name: "American")
     @airline2 = Airline.create!(name: "Delta")
@@ -35,9 +30,14 @@ describe 'class / instance methods' do
     FlightPassenger.create!(passenger: @passenger3, flight: @flight4)
     FlightPassenger.create!(passenger: @passenger4, flight: @flight5)
     FlightPassenger.create!(passenger: @passenger5, flight: @flight5)
+
+    visit "/airlines/#{@airline1.id}"
   end
 
-  it 'adult_passengers' do
-    expect(@airline1.adult_passengers).to eq([@passenger3, @passenger4])
+  it 'shows list of adulte passengers' do
+    expect(page).to have_content(@passenger3.name)
+    expect(page).to have_content(@passenger4.name)
+    expect(page).to_not have_content(@passenger1.name)
+    expect(page).to_not have_content(@passenger5.name)
   end
-end
+end 
