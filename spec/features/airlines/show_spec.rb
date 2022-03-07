@@ -31,8 +31,6 @@ describe 'airline show page' do
     visit "/airlines/#{@united.id}"
   end
   it 'shows me a list of all the passengers with that airline with no duplicates and only adults' do
-    save_and_open_page
-
     expect(page).to have_content("Adult Passengers: #{@bob.name} #{@linda.name}")
     expect(page).to_not have_content(@tina.name)
     expect(page).to_not have_content(@louise.name)
