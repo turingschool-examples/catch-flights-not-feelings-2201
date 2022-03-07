@@ -9,7 +9,7 @@
 FlightPassenger.destroy_all 
 Flight.destroy_all
 Passenger.destroy_all
-Airline.detroy_all 
+Airline.destroy_all 
 
 @airline1 = Airline.create!(name: "American")
 @airline2 = Airline.create!(name: "Delta")
