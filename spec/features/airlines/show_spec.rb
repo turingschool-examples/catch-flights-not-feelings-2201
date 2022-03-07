@@ -15,6 +15,7 @@ RSpec.describe 'airline show page' do
   let!(:michael) {flight_2.passengers.create!(name: 'Michael Scott', age: 35)}
   let!(:holly) {flight_3.passengers.create!(name: 'Holly Flax', age: 15)}
   let!(:pam) {flight_3.passengers.create!(name: 'Pam Halpert', age: 35)}
+  let!(:pam2) {flight_3.passengers.create!(name: 'Pam Halpert', age: 35)}
   let!(:jim) {flight_4.passengers.create!(name: 'Jim Halpert', age: 35)}
 
   let!(:passenger_flight_1) {PassengerFlight.create!(flight_id: flight_1.id, passenger_id: meghan.id)}
@@ -23,12 +24,13 @@ RSpec.describe 'airline show page' do
   let!(:passenger_flight_4) {PassengerFlight.create!(flight_id: flight_2.id, passenger_id: michael.id)}
   let!(:passenger_flight_5) {PassengerFlight.create!(flight_id: flight_3.id, passenger_id: holly.id)}
   let!(:passenger_flight_6) {PassengerFlight.create!(flight_id: flight_3.id, passenger_id: pam.id)}
+  let!(:passenger_flight_6) {PassengerFlight.create!(flight_id: flight_3.id, passenger_id: pam2.id)}
   let!(:passenger_flight_7) {PassengerFlight.create!(flight_id: flight_4.id, passenger_id: jim.id)}
 
   before(:each) do
     visit airline_path(southwest.id)
   end
-  it 'shows list of adult passengers with flights on that airline' do
+  it 'shows list of unique adult passengers with flights on that airline' do
     expect(page).to have_content(meghan.name)
     expect(page).to have_content(michael.name)
     expect(page).to have_content(pam.name)

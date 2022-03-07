@@ -21,16 +21,16 @@ RSpec.describe 'flight index page' do
   let!(:dwight) {flight_5.passengers.create!(name: 'Dwight Schrute', age: 35)}
   let!(:toby) {flight_5.passengers.create!(name: 'Toby Flenderson', age: 35)}
 
-  let!(:passenger_flight_1) {PassengerFlight.create!(flight_id: flight_1.id, passenger_id: meghan.id)}
-  let!(:passenger_flight_2) {PassengerFlight.create!(flight_id: flight_1.id, passenger_id: bob.id)}
-  let!(:passenger_flight_3) {PassengerFlight.create!(flight_id: flight_2.id, passenger_id: phyllis.id)}
-  let!(:passenger_flight_4) {PassengerFlight.create!(flight_id: flight_2.id, passenger_id: michael.id)}
-  let!(:passenger_flight_5) {PassengerFlight.create!(flight_id: flight_3.id, passenger_id: holly.id)}
-  let!(:passenger_flight_6) {PassengerFlight.create!(flight_id: flight_3.id, passenger_id: pam.id)}
-  let!(:passenger_flight_7) {PassengerFlight.create!(flight_id: flight_4.id, passenger_id: jim.id)}
-  let!(:passenger_flight_8) {PassengerFlight.create!(flight_id: flight_4.id, passenger_id: angela.id)}
-  let!(:passenger_flight_9) {PassengerFlight.create!(flight_id: flight_5.id, passenger_id: dwight.id)}
-  let!(:passenger_flight_9) {PassengerFlight.create!(flight_id: flight_5.id, passenger_id: toby.id)}
+  # let!(:passenger_flight_1) {PassengerFlight.create!(flight_id: flight_1.id, passenger_id: meghan.id)}
+  # let!(:passenger_flight_2) {PassengerFlight.create!(flight_id: flight_1.id, passenger_id: bob.id)}
+  # let!(:passenger_flight_3) {PassengerFlight.create!(flight_id: flight_2.id, passenger_id: phyllis.id)}
+  # let!(:passenger_flight_4) {PassengerFlight.create!(flight_id: flight_2.id, passenger_id: michael.id)}
+  # let!(:passenger_flight_5) {PassengerFlight.create!(flight_id: flight_3.id, passenger_id: holly.id)}
+  # let!(:passenger_flight_6) {PassengerFlight.create!(flight_id: flight_3.id, passenger_id: pam.id)}
+  # let!(:passenger_flight_7) {PassengerFlight.create!(flight_id: flight_4.id, passenger_id: jim.id)}
+  # let!(:passenger_flight_8) {PassengerFlight.create!(flight_id: flight_4.id, passenger_id: angela.id)}
+  # let!(:passenger_flight_9) {PassengerFlight.create!(flight_id: flight_5.id, passenger_id: dwight.id)}
+  # let!(:passenger_flight_9) {PassengerFlight.create!(flight_id: flight_5.id, passenger_id: toby.id)}
 
   before(:each) do
     visit flights_path
