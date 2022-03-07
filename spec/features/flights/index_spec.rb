@@ -36,6 +36,7 @@ RSpec.describe 'Flights Index Page' do
     passenger1 = Passenger.create!(name: "Tina Belcher")
     passenger2 = Passenger.create!(name: "Linda Belcher")
     passenger3 = Passenger.create!(name: "Louise Belcher")
+    passenger4 = Passenger.create!(name: "Bob Belcher")
     joins1 = FlightPassenger.create!(flight_id: flight1.id, passenger_id: passenger1.id)
     joins2 = FlightPassenger.create!(flight_id: flight2.id, passenger_id: passenger2.id)
     joins3 = FlightPassenger.create!(flight_id: flight3.id, passenger_id: passenger3.id)
@@ -50,9 +51,10 @@ RSpec.describe 'Flights Index Page' do
     within "#flights-#{flight3.id}" do
     expect(page).to have_content(passenger3.name)
     end 
+    expect(page).to have_no_content(passenger4.name)
   end 
 
-  it 'has a button to remove a passenger from a flight' do 
+  it 'has a button that removes a passenger from a flight' do 
     american = Airline.create!(name: "American")
     delta = Airline.create!(name: "Delta")
     smelta = Airline.create!(name: "Smelta")
@@ -72,6 +74,7 @@ RSpec.describe 'Flights Index Page' do
       expect(page).to have_button("Remove #{passenger1.name}")
       click_button("Remove #{passenger1.name}")
       expect(page).to have_no_content(passenger1.name)
+      expect(passenger1).to be_a(Passenger)
     end 
   end 
 end 
