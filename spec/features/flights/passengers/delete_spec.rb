@@ -10,12 +10,12 @@ RSpec.describe 'flight_passengers#destroy' do
     @passenger_2 = @flight.passengers.create!(name: "Little Joey", age: 16)
   end
 
-  it 'can delete a given warroom from a country' do
+  it 'can delete a given passenger from a flight' do
     visit "/flights"
 
-    click_button("Delete #{@passenger_2.name}")
+    click_button("Remove #{@passenger_2.name}")
 
-    expect(current_path).to eq("/flights")
+    expect(current_path).to eq("/flights/")
     expect(page).to_not have_content("Little Joey")
   end
 end
