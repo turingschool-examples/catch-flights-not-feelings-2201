@@ -29,59 +29,114 @@ RSpec.describe 'flights index' do
     @fp7 = FlightPassenger.create!(flight: @flight5, passenger: @passenger5)
     visit flights_path
   end
-  it 'has a list of all flight numbers' do 
-    expect(page).to have_content(@flight1.number)
-    expect(page).to have_content(@flight2.number)
-    expect(page).to have_content(@flight3.number)
-    expect(page).to have_content(@flight4.number)
-    expect(page).to have_content(@flight5.number)
-    expect(page).to_not have_content(@flight5.date)
-    expect(page).to_not have_content(@flight4.departure_city)
-    expect(page).to_not have_content(@flight3.arrival_city)
+  describe 'the idex contents' do 
+    it 'has a list of all flight numbers' do 
+      expect(page).to have_content(@flight1.number)
+      expect(page).to have_content(@flight2.number)
+      expect(page).to have_content(@flight3.number)
+      expect(page).to have_content(@flight4.number)
+      expect(page).to have_content(@flight5.number)
+      expect(page).to_not have_content(@flight5.date)
+      expect(page).to_not have_content(@flight4.departure_city)
+      expect(page).to_not have_content(@flight3.arrival_city)
+    end
+  
+    it 'has name of airline next to each flight number for that flight' do 
+      within "#flight-#{@flight1.id}" do 
+        expect(page).to have_content(@flight1.airline.name)
+        expect(page).to_not have_content(@airline4.name)
+      end
+      within "#flight-#{@flight2.id}" do 
+        expect(page).to have_content(@flight2.airline.name)
+        expect(page).to_not have_content(@airline4.name)
+      end
+      within "#flight-#{@flight3.id}" do 
+        expect(page).to have_content(@flight3.airline.name)
+      end
+      within "#flight-#{@flight4.id}" do 
+        expect(page).to have_content(@flight4.airline.name)
+      end
+      within "#flight-#{@flight5.id}" do 
+        expect(page).to have_content(@flight5.airline.name)
+      end
+    end
+  
+    it 'has names of each passenger on a flight under each flight number' do 
+      within "#flight-#{@flight1.id}" do 
+        expect(page).to have_content(@passenger1.name)
+        expect(page).to have_content(@passenger2.name)
+        expect(page).to_not have_content(@passenger3.name)
+      end
+      within "#flight-#{@flight2.id}" do 
+        expect(page).to have_content(@passenger1.name)
+        expect(page).to have_content(@passenger3.name)
+        expect(page).to_not have_content(@passenger2.name)
+      end
+      within "#flight-#{@flight3.id}" do 
+        expect(page).to have_content(@passenger4.name)
+        expect(page).to_not have_content(@passenger3.name)
+      end
+      within "#flight-#{@flight4.id}" do 
+        expect(page).to have_content(@passenger4.name)
+        expect(page).to_not have_content(@passenger3.name)
+      end
+      within "#flight-#{@flight5.id}" do 
+        expect(page).to have_content(@passenger5.name)
+        expect(page).to_not have_content(@passenger3.name)
+      end
+    end
   end
+  describe 'Remove a passenger from flight' do 
+    it 'has a link to remove passenger from flight' do 
+      within "#flight-#{@flight1.id}" do 
+        expect(page).to have_button("Remove Passenger", count: 2)
+        expect(page).to have_content(@passenger1.name)
+        expect(page).to have_content(@passenger2.name)
+      end
+      within "#flight-#{@flight2.id}" do 
+        expect(page).to have_content(@passenger1.name)
+        expect(page).to have_content(@passenger3.name)
+        expect(page).to have_button("Remove Passenger", count: 2)
+      end
+      within "#flight-#{@flight3.id}" do 
+        expect(page).to have_content(@passenger4.name)
+        expect(page).to have_button("Remove Passenger", count: 1)
+      end
+      within "#flight-#{@flight4.id}" do 
+        expect(page).to have_content(@passenger4.name)
+        expect(page).to have_button("Remove Passenger", count: 1)
+      end
+      within "#flight-#{@flight5.id}" do 
+        expect(page).to have_content(@passenger5.name)
+        expect(page).to have_button("Remove Passenger", count: 1)
+      end      
+    end
+    it 'removes passenger from flight when button clicked' do 
+      within "#flight-#{@flight1.id}" do 
+        first(:button, "Remove Passenger").click
+      end
+      
+      expect(current_path).to eq(flights_path)
+      
+      within "#flight-#{@flight1.id}" do 
+        expect(page).to have_button("Remove Passenger", count: 1)
+        expect(page).to have_content(@passenger2.name)
+        expect(page).to_not have_content(@passenger1.name)
+      end
+    end
+    it 'does not delete the passenger record all together' do 
+      within "#flight-#{@flight1.id}" do 
+        first(:button, "Remove Passenger").click
+      end
+      within "#flight-#{@flight1.id}" do 
+        expect(page).to have_button("Remove Passenger", count: 1)
+        expect(page).to_not have_content(@passenger1.name)
+        expect(page).to have_content(@passenger2.name)
+      end
 
-  it 'has name of airline next to each flight number for that flight' do 
-    within "#flight-#{@flight1.id}" do 
-      expect(page).to have_content(@flight1.airline.name)
-      expect(page).to_not have_content(@airline4.name)
-    end
-    within "#flight-#{@flight2.id}" do 
-      expect(page).to have_content(@flight2.airline.name)
-      expect(page).to_not have_content(@airline4.name)
-    end
-    within "#flight-#{@flight3.id}" do 
-      expect(page).to have_content(@flight3.airline.name)
-    end
-    within "#flight-#{@flight4.id}" do 
-      expect(page).to have_content(@flight4.airline.name)
-    end
-    within "#flight-#{@flight5.id}" do 
-      expect(page).to have_content(@flight5.airline.name)
-    end
-  end
-
-  it 'has names of each passenger on a flight under each flight number' do 
-    within "#flight-#{@flight1.id}" do 
-      expect(page).to have_content(@passenger1.name)
-      expect(page).to have_content(@passenger2.name)
-      expect(page).to_not have_content(@passenger3.name)
-    end
-    within "#flight-#{@flight2.id}" do 
-      expect(page).to have_content(@passenger1.name)
-      expect(page).to have_content(@passenger3.name)
-      expect(page).to_not have_content(@passenger2.name)
-    end
-    within "#flight-#{@flight3.id}" do 
-      expect(page).to have_content(@passenger4.name)
-      expect(page).to_not have_content(@passenger3.name)
-    end
-    within "#flight-#{@flight4.id}" do 
-      expect(page).to have_content(@passenger4.name)
-      expect(page).to_not have_content(@passenger3.name)
-    end
-    within "#flight-#{@flight5.id}" do 
-      expect(page).to have_content(@passenger5.name)
-      expect(page).to_not have_content(@passenger3.name)
+      within "#flight-#{@flight2.id}" do 
+        expect(page).to have_content(@passenger1.name)
+      end
     end
   end
 end 
