@@ -60,5 +60,6 @@ RSpec.describe 'Flights Index Page' do
     expect(current_path).to eq("/flights")
 
     expect(page).to_not have_content("#{@passenger_1.name}")
+    #Kept Getting this error - NoMethodError: undefined method `join' for {:passenger_id=>1281, :flight_id=>641}:Hash
   end
 end
