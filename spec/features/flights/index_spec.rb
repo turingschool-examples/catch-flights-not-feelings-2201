@@ -53,7 +53,7 @@ RSpec.describe 'flight index page' do
 #
 # (Note: you should not destroy the passenger record entirely)
 
-  xit 'can see a link or button to remove that passenger from that flight' do
+  it 'can see a link or button to remove that passenger from that flight' do
     airline = Airline.create(name: "American")
     airline_2 = Airline.create(name: "LAM")
     flight_1 = airline.flights.create(number: "1727", date: "08/03/20", departure_city: "Denver", arrival_city: "Reno")

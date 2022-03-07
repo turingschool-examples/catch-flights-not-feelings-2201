@@ -1,6 +1,5 @@
 class Airline < ApplicationRecord
   has_many :flights
-  has_many :passengers, through: :flights
 
   def adult_passengers
     Airline.joins(flights: :passengers).where('age >= ?', 18)
