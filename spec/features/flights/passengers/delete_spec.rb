@@ -15,7 +15,7 @@ RSpec.describe 'flight_passengers#destroy' do
 
     click_button("Remove #{@passenger_2.name}")
 
-    expect(current_path).to eq("/flights/")
+    expect(current_path).to eq("/flights")
     expect(page).to_not have_content("Little Joey")
   end
 end
