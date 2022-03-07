@@ -108,7 +108,7 @@ RSpec.describe "Flights Index:", type: :feature do
 
   it 'removes a passenger from the flight' do
     visit("/flights")
-
+save_and_open_page
     within("#flight-#{@flight1.id}") do
       within("#passenger-#{@passenger1.id}")do
         click_button("remove")
