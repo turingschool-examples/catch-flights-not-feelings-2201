@@ -25,6 +25,29 @@ RSpec.describe 'Flights Index Page' do
   end
 
   it "shows flights attributes" do
+    visit "/flights"
+save_and_open_page
 
+    within ".flight_attributes" do
+      expect(page).to have_content("#{@flight_1.number}")
+      expect(page).to have_content("#{@airline_1.name}")
+      expect(page).to have_content("#{@passenger_1.name}")
+      expect(page).to have_content("#{@passenger_2.name}")
+
+      expect(page).to have_content("#{@flight_2.number}")
+      expect(page).to have_content("#{@airline_1.name}")
+      expect(page).to have_content("#{@passenger_3.name}")
+      expect(page).to have_content("#{@passenger_4.name}")
+
+      expect(page).to have_content("#{@flight_3.number}")
+      expect(page).to have_content("#{@airline_2.name}")
+      expect(page).to have_content("#{@passenger_5.name}")
+      expect(page).to have_content("#{@passenger_6.name}")
+
+      expect(page).to have_content("#{@flight_4.number}")
+      expect(page).to have_content("#{@airline_2.name}")
+      expect(page).to have_content("#{@passenger_7.name}")
+      expect(page).to have_content("#{@passenger_8.name}")
+    end
   end
 end
