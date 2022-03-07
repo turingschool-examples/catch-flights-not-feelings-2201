@@ -2,6 +2,6 @@
 
 <h2> Passengers </h2>
 
-<%= @airline.passengers.each do |passenger|%>
+<%= @airline.list_all_adult_passengers.each do |passenger|%>
   <li> <%= passenger.name %> </li>
 <% end %>
