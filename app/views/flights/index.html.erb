@@ -8,8 +8,7 @@
       <h3>Flight Number: <%= flight.number %></h3>
       <% flight.passengers.each do |passenger| %>
         <ul>
-          <li>Passenger name: <%= passenger.name %></li>
-          <%= button_to "Remove #{passenger.name}", flight_passenger_path(flight.id, passenger.id),method: :delete %>
+          <li>Passenger name: <%= passenger.name %></li> <%= button_to "Remove #{passenger.name}", flight_passenger_path(flight.id, passenger.id),method: :delete %>
         </ul>
      <% end  %>
   <% end %>

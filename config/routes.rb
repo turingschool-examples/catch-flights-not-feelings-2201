@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :airlines, only: [:show]
   resources :flights, only: [:index] do
-    resources :passengers, only: [:destroy]
+    resources :passengers, only: [:destroy], controller: 'passenger_flights'
   end
 
 end
