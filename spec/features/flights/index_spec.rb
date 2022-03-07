@@ -59,6 +59,7 @@ RSpec.describe "Flights Index Page" do
       within "div.flight_#{flight1.id}" do
         expect(page).to have_content(passenger1.name)
         expect(page).to have_content(passenger2.name)
+        expect(page).to_not have_content(passenger3.name)
       end
     end
 
