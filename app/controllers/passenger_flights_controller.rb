@@ -4,8 +4,13 @@ class PassengerFlightsController < ApplicationController
   before_action :set_flight, only: [:destroy]
 
   def destroy
-    @pf.destroy
-    redirect_to flights_path
+    if @pf.destroy
+      flash[:notice] = "#{@passenger.name} has been removed from Flight No: #{@flight.number}"
+      redirect_to flights_path
+    else
+      flash[:notice] = "Your request was invalid. Please try again"
+      redirect_to flights_path
+    end
   end
 
   private

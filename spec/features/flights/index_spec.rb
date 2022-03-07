@@ -61,8 +61,9 @@ RSpec.describe 'Flights Index Page' do
       within "div.flights_#{@flight1.number}" do
         click_on "Remove #{@wayne.name}"
       end
-
       expect(current_path).to eq(flights_path)
+      expect(page).to have_content("#{@wayne.name} has been removed from Flight No: #{@flight1.number}")
+
       within "div.passengers_#{@flight1.number}" do
         expect(page).to_not have_content(@wayne.name)
       end
