@@ -19,11 +19,11 @@ RSpec.describe 'The Airlines Show Page' do
     expect(page).to have_no_content(delta.name)
 
     within '#tina' do 
-      expect(page).to have_content("Tina")
+      expect(page).to have_content(passenger1.name, count: 1)
     end 
 
     within '#linda' do 
-      expect(page).to have_content("Linda")
+      expect(page).to have_content(passenger2.name, count: 1)
     end 
     expect(page).to have_no_content(passenger3.name)
   end 
