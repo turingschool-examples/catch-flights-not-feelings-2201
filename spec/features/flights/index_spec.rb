@@ -106,7 +106,7 @@ RSpec.describe "Flights Index Page" do
     expect(page).to_not have_content(a3.name)
   end
 
-  xit 'has a link to remove a passenger' do
+  it 'has a link to remove a passenger' do
     a1 = Airline.create!(name: "Frontier")
     a2 = Airline.create!(name: "Southwest")
     a3 = Airline.create!(name: "Delta")
@@ -140,7 +140,7 @@ RSpec.describe "Flights Index Page" do
     expect(page).to have_content(p2.name)
 
     click_link "Remove #{p1.name}"
-
+save_and_open_page
     expect(page).to_not have_content(p1.name)
     expect(page).to have_content(p2.name)
   end

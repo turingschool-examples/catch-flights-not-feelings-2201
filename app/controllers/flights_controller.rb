@@ -4,6 +4,7 @@ class FlightsController < ApplicationController
     @airlines = Airline.all
   end
 
-  # def destroy
-  # end
+  def destroy
+    require "pry"; binding.pry
+  end
 end
