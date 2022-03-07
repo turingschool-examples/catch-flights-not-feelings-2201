@@ -38,10 +38,34 @@ RSpec.describe "Flights Index:", type: :feature do
     expect(page).to have_content(@flight5.number)
   end
 
+  it 'lists each flights airline' do
+    visit("/flights")
+
+    within("#flight-#{@flight1.id}") do
+      expect(page).to have_content(@flight1.airline.name)
+    end
+
+    within("#flight-#{@flight2.id}") do
+      expect(page).to have_content(@flight2.airline.name)
+    end
+
+    within("#flight-#{@flight3.id}") do
+      expect(page).to have_content(@flight3.airline.name)
+    end
+
+    within("#flight-#{@flight4.id}") do
+      expect(page).to have_content(@flight4.airline.name)
+    end
+
+    within("#flight-#{@flight5.id}") do
+      expect(page).to have_content(@flight5.airline.name)
+    end
+  end
+
   it 'lists each flights passengers' do
     visit("/flights")
 
-    within("flight-#{@flight1.id}") do
+    within("#flight-#{@flight1.id}") do
       expect(page).to have_content(@passenger1.name)
       expect(page).to have_content(@passenger2.name)
       expect(page).to have_content(@passenger3.name)
@@ -49,7 +73,7 @@ RSpec.describe "Flights Index:", type: :feature do
       expect(page).to_not have_content(@passenger5.name)
     end
 
-    within("flight-#{@flight2.id}") do
+    within("#flight-#{@flight2.id}") do
       expect(page).to_not have_content(@passenger1.name)
       expect(page).to_not have_content(@passenger2.name)
       expect(page).to_not have_content(@passenger3.name)
@@ -57,7 +81,7 @@ RSpec.describe "Flights Index:", type: :feature do
       expect(page).to have_content(@passenger5.name)
     end
 
-    within("flight-#{@flight3.id}") do
+    within("#flight-#{@flight3.id}") do
       expect(page).to_not have_content(@passenger1.name)
       expect(page).to_not have_content(@passenger2.name)
       expect(page).to_not have_content(@passenger3.name)
@@ -65,7 +89,7 @@ RSpec.describe "Flights Index:", type: :feature do
       expect(page).to have_content(@passenger5.name)
     end
 
-    within("flight-#{@flight4.id}") do
+    within("#flight-#{@flight4.id}") do
       expect(page).to_not have_content(@passenger1.name)
       expect(page).to_not have_content(@passenger2.name)
       expect(page).to_not have_content(@passenger3.name)
@@ -73,7 +97,7 @@ RSpec.describe "Flights Index:", type: :feature do
       expect(page).to have_content(@passenger5.name)
     end
 
-    within("flight-#{@flight5.id}") do
+    within("#flight-#{@flight5.id}") do
       expect(page).to_not have_content(@passenger1.name)
       expect(page).to_not have_content(@passenger2.name)
       expect(page).to_not have_content(@passenger3.name)
