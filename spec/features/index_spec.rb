@@ -30,7 +30,7 @@ RSpec.describe 'Flight Index Page', type: :feature do
 
     it 'will display flight numbers with the airline name and coorsponding passengers' do
       visit flights_path
-save_and_open_page
+
       within("#flight-0") do
 
         expect(page).to have_content(@flight1.number)
