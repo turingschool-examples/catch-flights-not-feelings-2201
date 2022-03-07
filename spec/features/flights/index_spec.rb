@@ -28,10 +28,12 @@ describe 'flights index page' do
 
     expect(page).to have_content("Flight: #{@flight_1.number}")
     expect(page).to have_content("Airline: #{@airline_1.name}")
-    expect(page).to have_content("Passengers: #{@passenger_1.name}, #{@passenger_2.name}")
+    expect(page).to have_content("Passengers: #{@passenger_1.name}")
+    expect(page).to have_content("Passengers: #{@passenger_2.name}")
     expect(page).to have_content("Flight: #{@flight_2.number}")
     expect(page).to have_content("Airline: #{@airline_2.name}")
-    expect(page).to have_content("Passengers: #{@passenger_3.name}, #{@passenger_4.name}")
+    expect(page).to have_content("Passengers: #{@passenger_3.name}")
+    expect(page).to have_content("Passengers: #{@passenger_4.name}")
   end
 
   it 'I see a button that can remove passenger from flight (not destroy passenger)' do
