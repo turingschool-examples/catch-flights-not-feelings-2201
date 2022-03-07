@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Flights Index Page' do
+RSpec.describe 'Airline Show Page' do
   before :each do
     @airline_1 = Airline.create!(name: "Southwest")
     @airline_2 = Airline.create!(name: "United")
@@ -24,41 +24,19 @@ RSpec.describe 'Flights Index Page' do
     @passenger_8 = @flight_4.passengers.create!(name: "Chadwick Bosman", age: 28 )
   end
 
-  it "shows flights attributes" do
-    visit "/flights"
+  it "Shows Passengers on a flight in that airline" do
+    duplicate = PassengerFlight.create!(passenger_id: @passenger_3.id, flight_id: @flight_1.id)
 
-    within ".flight_attributes" do
-      expect(page).to have_content("#{@flight_1.number}")
-      expect(page).to have_content("#{@airline_1.name}")
+    visit "/airlines/#{@airline_1.id}"
+
+    within ".passengers" do
       expect(page).to have_content("#{@passenger_1.name}")
       expect(page).to have_content("#{@passenger_2.name}")
-
-      expect(page).to have_content("#{@flight_2.number}")
-      expect(page).to have_content("#{@airline_1.name}")
       expect(page).to have_content("#{@passenger_3.name}")
-      expect(page).to have_content("#{@passenger_4.name}")
+      expect(page).to_not have_content("#{@passenger_4.name}")
+      expect("#{@passenger_3.name}".count).to eq(1)
 
-      expect(page).to have_content("#{@flight_3.number}")
-      expect(page).to have_content("#{@airline_2.name}")
-      expect(page).to have_content("#{@passenger_5.name}")
-      expect(page).to have_content("#{@passenger_6.name}")
-
-      expect(page).to have_content("#{@flight_4.number}")
-      expect(page).to have_content("#{@airline_2.name}")
-      expect(page).to have_content("#{@passenger_7.name}")
-      expect(page).to have_content("#{@passenger_8.name}")
+      expect(page).to_not have_content("#{@passenger_5.name}")
     end
-  end
-
-  it "can remove a passenger" do
-    visit "/flights"
-
-    within ".flight_attributes" do
-      click_link("Remove #{@passenger_1.name}")
-    end
-
-    expect(current_path).to eq("/flights")
-
-    expect(page).to_not have_content("#{@passenger_1.name}")
   end
 end
