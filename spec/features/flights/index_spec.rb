@@ -42,7 +42,24 @@ RSpec.describe "Flights Index Page" do
     end
 
     it "under each flight number, I see the names of all that flights passengers" do
+      airline = Airline.create!(name: "American")
+      airline2 = Airline.create!(name: "Delta")
+      flight1 = airline.flights.create!(number: "7990", date: "2/7/2022", departure_city: "Glendale", arrival_city: "Dallas")
+      flight3 = airline2.flights.create!(number: "3940", date: "3/10/2022", departure_city: "Detroit", arrival_city: "Orlando")
+      passenger1 = flight1.passengers.create!(name: 'Tina Belcher', age: 13)
+      passenger2 = flight1.passengers.create!(name: 'Loiuse Belcher', age: 9)
+      passenger3 = flight3.passengers.create!(name: 'Bob Belcher', age: 9)
 
+      visit '/flights'
+
+      within "div.flight_#{flight3.id}" do
+        expect(page).to have_content(passenger3.name)
+      end
+
+      within "div.flight_#{flight1.id}" do
+        expect(page).to have_content(passenger1.name)
+        expect(page).to have_content(passenger2.name)
+      end
     end
   end
 end
