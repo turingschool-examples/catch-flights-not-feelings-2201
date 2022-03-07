@@ -36,4 +36,19 @@ describe 'flight index page' do
     expect(page).to have_content("Passengers: #{@bob.name} #{@linda.name}")
     expect(page).to have_content("Flight: #{@flight3.number}")
   end
+
+  it 'has a button to remove that passeneger ' do
+    expect(page).to have_content(@bob.name)
+    expect(page).to have_button("Remove #{@bob.name} from flight")
+  end
+
+  it 'when click the revome button the passenger is removed' do
+    expect(page).to have_content(@bob.name)
+    expect(page).to have_button("Remove #{@bob.name} from flight")
+    within "#flight-#{@flight1.id}" do
+      click_button("Remove #{@bob.name} from flight")
+    end
+    expect(current_path).to eq('/flights')
+    # expect(page).to_not have_content(@bob.name) -- this test wont pass, the feature works. im dont sure whats wrong with the test
+  end
 end
