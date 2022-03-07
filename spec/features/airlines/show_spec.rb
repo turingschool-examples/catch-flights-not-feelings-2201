@@ -23,15 +23,22 @@ describe 'airline show page' do
     visit airline_path(@luftansa.id)
   end
   it 'I see only one airline' do
-    expect(page).to have_content(@luftansa.name)
-    expect(page).to_not have_content(@southwest.name)
+    within 'div.name' do
+      expect(page).to have_content(@luftansa.name)
+      expect(page).to_not have_content(@southwest.name)
+    end
   end
   it 'I see a unique list of adult passengers that have flights on that airline' do
-    expect(page).to have_content("Passengers: #{@gunnar.name} #{@sakic.name}")
-    expect(page).to_not have_content(@onyx.name)
-    expect(page).to_not have_content(@priska.name)
+
+    within 'div.adults' do
+      expect(page).to have_content("Passengers: #{@gunnar.name} #{@sakic.name}")
+      expect(page).to_not have_content(@onyx.name)
+      expect(page).to_not have_content(@priska.name)
+    end
   end
   it 'I do not see under 18 passengers that have flights on that airline' do
-    expect(page).to_not have_content(@lynn.name)
+    within 'div.adults' do
+      expect(page).to_not have_content(@lynn.name)
+    end
   end
 end
