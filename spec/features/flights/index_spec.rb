@@ -60,7 +60,6 @@ RSpec.describe 'Flights index page' do
 
   it 'lists the airline number for the flight' do
     visit '/flights'
-    save_and_open_page
     within 'flight_001'
     expect(page).to have_content("Airline: #{@flight_1.airline.name}")
     within 'flight_002'
@@ -71,6 +70,23 @@ RSpec.describe 'Flights index page' do
     expect(page).to have_content("Airline: #{@flight_4.airline.name}")
     within 'flight_005'
     expect(page).to have_content("Airline: #{@flight_5.airline.name}")
+  end
+
+  it 'lists the names of all the passengers on each flight'do
+  visit '/flights'
+  save_and_open_page
+  within 'flight_001'
+  expect(page).to have_content(@passenger_1.name)
+  expect(page).to have_content(@passenger_6.name)
+  expect(page).to have_content(@passenger_5.name)
+  within 'flight_002'
+  expect(page).to have_content(@passenger_2.name)
+  within 'flight_003'
+  expect(page).to have_content(@passenger_3.name)
+  within 'flight_004'
+  expect(page).to have_content(@passenger_4.name)
+  within 'flight_005'
+  expect(page).to have_content(@passenger_5.name)
 
   end
 end
