@@ -4,8 +4,10 @@ class FlightsController < ApplicationController
   end
 
   def destroy # This should be in its own appropriate controller I believe
+    flight = Flight.find(params[:flight_id])
     passenger = Passenger.find(params[:passenger_id])
-    passenger.destroy
+
+    flight.passengers.delete(passenger)
 
     redirect_to "/flights"
   end
