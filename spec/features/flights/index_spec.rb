@@ -12,9 +12,7 @@ RSpec.describe 'flight index page' do
     airline = Airline.create(name: "American")
     airline_2 = Airline.create(name: "LAM")
     flight_1 = airline.flights.create(number: "1727", date: "08/03/20", departure_city: "Denver", arrival_city: "Reno")
-    flight_2 = airline.flights.create(number: "1567", date: "07/03/20", departure_city: "Cali", arrival_city: "Bogota")
-    flight_3 = airline.flights.create(number: "4777", date: "06/03/20", departure_city: "La Paz", arrival_city: "Santa Cruz")
-
+    flight_2 = airline_2.flights.create(number: "1567", date: "07/03/20", departure_city: "Cali", arrival_city: "Bogota")
 
     ana = Passenger.create(name: 'Ana', age: 45)
     eva = Passenger.create(name: 'Eva', age: 37)
@@ -24,26 +22,21 @@ RSpec.describe 'flight index page' do
     PassengerFlight.create(flight_id: flight_1.id, passenger_id: ana.id)
     PassengerFlight.create(flight_id: flight_1.id, passenger_id: eva.id)
     PassengerFlight.create(flight_id: flight_2.id, passenger_id: nelson.id)
-    PassengerFlight.create(flight_id: flight_3.id, passenger_id: adalid.id)
+    PassengerFlight.create(flight_id: flight_2.id, passenger_id: adalid.id)
 
     visit "/flights"
 
     within "#flight-#{flight_1.id}" do
       expect(page).to have_content(flight_1.number)
-      expect(page).to have_content(airline.number)
+      expect(page).to have_content(airline.name)
       expect(page).to have_content(ana.name)
       expect(page).to have_content(eva.name)
     end
 
     within "#flight-#{flight_2.id}" do
       expect(page).to have_content(flight_2.number)
-      expect(page).to have_content(airline.number)
+      expect(page).to have_content(airline_2.name)
       expect(page).to have_content(nelson.name)
-    end
-
-    within "#flight-#{flight_3.id}" do
-      expect(page).to have_content(flight_3.number)
-      expect(page).to have_content(airline.number)
       expect(page).to have_content(adalid.name)
     end
   end
