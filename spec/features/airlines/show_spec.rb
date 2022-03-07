@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Airline Show Page" do
   describe 'When I visit the Airline Show page,' do
-    xit "I see a unique list of passengers(no duplicates) that only includes adults" do
+    it "I see a unique list of passengers(no duplicates) that only includes adults" do
       airline = Airline.create!(name: "American")
       flight1 = airline.flights.create!(number: "7990", date: "2/7/2022", departure_city: "Glendale", arrival_city: "Dallas")
       flight2 = airline.flights.create!(number: "3940", date: "3/10/2022", departure_city: "Detroit", arrival_city: "Orlando")
@@ -19,6 +19,8 @@ RSpec.describe "Airline Show Page" do
       expect(page).to have_content(passenger3.name)
       expect(page).to have_content(passenger4.name)
       expect(page).to have_content(passenger5.name)
+      expect(page).to_not have_content(passenger1.name)
+      expect(page).to_not have_content(passenger2.name)
     end
   end
 end
