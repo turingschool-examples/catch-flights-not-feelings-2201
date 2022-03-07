@@ -9,6 +9,8 @@
   <p>Passengers: <% flight.passengers.each_with_index do |passenger, index| %>
   <div id="passengers-<%= index %>">
     <%= passenger.name %>
+    <%= link_to "Remove Passenger", flight_passenger_path(passenger, flight), method: :delete,
+    params: {flight_id: flight.id} %>
   </div>
   <% end %>
   </p>
