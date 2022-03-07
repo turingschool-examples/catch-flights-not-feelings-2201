@@ -40,19 +40,39 @@ RSpec.describe 'flights index page' do
   it 'lists the airline number for the flight' do
      visit "/flights"
 
-     within 'flight_001'
      expect(page).to have_content("Airline: #{flight_1.airline.name}")
-
-     within 'flight_002'
      expect(page).to have_content("Airline: #{flight_2.airline.name}")
-
-     within 'flight_003'
      expect(page).to have_content("Airline: #{flight_3.airline.name}")
-
-     within 'flight_004'
      expect(page).to have_content("Airline: #{flight_4.airline.name}")
-
-     within 'flight_005'
      expect(page).to have_content("Airline: #{flight_5.airline.name}")
    end
+
+   it 'lists the names of all the passengers on each flight'do
+     visit '/flights'
+
+     expect(page).to have_content(passenger_1.name)
+     expect(page).to have_content(passenger_2.name)
+     expect(page).to have_content(passenger_3.name)
+     expect(page).to have_content(passenger_4.name)
+     expect(page).to have_content(passenger_5.name)
+     expect(page).to have_content(passenger_6.name)
+     expect(page).to have_content(passenger_7.name)
+   end
+
+  it "shows a button that can remove a passenger from a flight" do
+    visit "/flights"
+
+    expect(page).to have_content(passenger_1.name)
+
+    click_on "Remove #{passenger_1.name}"
+
+    expect(page).to_not have_content(passenger_1.name)
+  end
+
+
+  it 'removes a passenger when clicking button and redirects to index page' do
+
+  end
+
+
  end
