@@ -1,5 +1,7 @@
 <h1>Airline <%= @airline.name %></h1>
 
-<%= @airline.uniq_adult.passengers.each do |passenger| %>
-<p>Airline Adult Passengers: <%= passenger.name %></p>
-<% end %>
+<div class="passengers">
+  <%= @airline.uniq_adults.each do |passenger| %>
+  <p>Airline Adult Passengers: <%= passenger.name %></p>
+  <% end %>  
+</div>
