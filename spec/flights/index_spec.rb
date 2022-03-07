@@ -25,10 +25,8 @@ describe "index page" do
     visit "/flights"
     within("#delete1") do
       click_button('remove passenger')
-      
       expect(page).to_not have_content(@person1.name)
     end
-
+    expect(Passenger.where(id: "#{@person1.id}")).to exist
   end
-
 end
