@@ -1,0 +1,13 @@
+<% @flights.each_with_index do | flight, index| %>
+<div id="flight-<%= index %>">
+  <h1>Flight Number: <%= flight.number %>  Airline: <%= flight.airline_name %></h1>
+  <h2>Passengers:</h2>
+    <p><% flight.passenger_flights. each do | pass_flight | %></p>
+      <p><%= pass_flight.find_name %></p>
+      <%= form_with url: '/flights', method: :delete, local: true do |f| %>
+      <%= f.text_field :id, value: pass_flight.id, hidden: true %>
+      <%= f.submit "Remove #{pass_flight.find_name} from this flight" %>
+      <% end %>
+      <% end %>
+    </div>
+  <% end %>
