@@ -3,13 +3,11 @@ class Airline < ApplicationRecord
 
   has_many :flights
   has_many :passenger_flights, through: :flights
-  has_many :passengers, through: :passenger_flights
+  has_many :passengers, through: :flights
 
 
   def uniq_adults
-    passengers.joins(:flights)
-    .select(:name, :age)
-    .where("age > ?", 18)
+    passengers.where("age > ?", 18)
     .distinct
   end
 end

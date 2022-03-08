@@ -17,17 +17,22 @@ RSpec.describe Airline, type: :model do
       @flight_1 = @airline_1.flights.create!(number: 7946, date: "01/01/22", departure_city: "Denver", arrival_city: "Los Angeles" )
       @flight_2 = @airline_1.flights.create!(number: 1346, date: "02/02/22", departure_city: "New York", arrival_city: "Austin" )
 
-      @passenger_1 = @flight_1.passengers.create!(name: "Randy Smith", age: 25 )
-      @passenger_2 = @flight_1.passengers.create!(name: "Tina Belcher", age: 20 )
-      @passenger_3 = @flight_2.passengers.create!(name: "Big Bob", age: 40 )
-      @passenger_4 = @flight_2.passengers.create!(name: "Little Bob", age: 15 )
-      duplicate = PassengerFlight.create!(passenger_id: @passenger_3.id, flight_id: @flight_1.id)
+      @passenger_1 = Passenger.create!(name: "Randy Smith", age: 25 )
+      @passenger_2 = Passenger.create!(name: "Tina Belcher", age: 20 )
+      @passenger_3 = Passenger.create!(name: "Big Bob", age: 40 )
+      @passenger_4 = Passenger.create!(name: "Little Bob", age: 15 )
+
+      randy = PassengerFlight.create!(passenger_id: @passenger_1.id, flight_id: @flight_1.id)
+      tina = PassengerFlight.create!(passenger_id: @passenger_2.id, flight_id: @flight_1.id)
+      big_bob = PassengerFlight.create!(passenger_id: @passenger_3.id, flight_id: @flight_1.id)
+      big_bob_2 = PassengerFlight.create!(passenger_id: @passenger_3.id, flight_id: @flight_1.id)
+      little_bob = PassengerFlight.create!(passenger_id: @passenger_4.id, flight_id: @flight_1.id)
+
 
     end
     it "shows uniqe adults" do
 
-      #expect(@airline_1.uniq_adults).to eq([@passenger_3, @passenger_1, @passenger_2])
-      #I get the right answer, but I don't know how to test for activerecord association
+      expect(@airline_1.uniq_adults).to eq([@passenger_1, @passenger_2, @passenger_3])
     end
   end
 end
