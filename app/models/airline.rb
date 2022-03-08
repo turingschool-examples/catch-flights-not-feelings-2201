@@ -4,10 +4,7 @@ class Airline < ApplicationRecord
   has_many :passengers, through: :passenger_flights
 
 
-  def self.get_uniq_passengers(airline)
-    Airline.joins(:passengers).
-            where('passengers.age > 17', airline: airline).
-            select('passengers.*').
-            uniq
+  def adult_passengers
+    self.passengers.where('age > 17').distinct
   end
 end

@@ -1,11 +1,5 @@
 class FlightsController < ApplicationController
     def index 
-        @flights = Flight.all.limit(3)
-    end
-    def destroy 
-        flight = Flight.find(params[:flight_id])
-        passenger = Passenger.find(params[:id])
-        flight.remove_passenger(passenger)
-        redirect_to(flights_path, notice: "Passenger Removed")
+        @flights = Flight.all
     end
 end
