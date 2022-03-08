@@ -4,4 +4,5 @@ class PassengerFlightsController < ApplicationController
     PassengerFlight.find(params[:id]).destroy
     redirect_to '/flights'
   end
+
 end
