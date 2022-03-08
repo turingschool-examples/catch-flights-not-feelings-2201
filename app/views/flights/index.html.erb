@@ -1,0 +1,13 @@
+<p>Flight Numbers:</p>
+<% @flights.each do |flight| %>
+  <%= flight.number %>, 
+    <% @airlines.each do |airline| %><br>
+      <% if flight.airline_id == airline.id %>
+        <%= airline.name %>
+      <% end %>
+    <% end %>
+  <% flight.passengers.each do |passenger| %>
+    <%= passenger.name %><br>
+    <%= link_to "Remove #{passenger.name}", "/passenger_flights/#{passenger.id}/#{flight.id}", method: :delete %>
+  <% end %><br><br>
+<% end %>
