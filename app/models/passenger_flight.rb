@@ -4,7 +4,7 @@ class PassengerFlight < ApplicationRecord
 
 
     def find_name
-      person = Passenger.find_by(params[:passenger_id])
+      person = Passenger.find(self.passenger_id)
       person.name
     end
 end
