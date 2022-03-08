@@ -140,6 +140,7 @@ RSpec.describe "Flights Index Page" do
     expect(page).to have_content(p2.name)
 
     click_link "Remove #{p1.name}"
+    expect(current_path).to eq "/flights"
 save_and_open_page
     expect(page).to_not have_content(p1.name)
     expect(page).to have_content(p2.name)
